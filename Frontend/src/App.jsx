@@ -1,8 +1,19 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/home/HomePage";
+import Header from "./compnents/header/Header";
+import BookPage from "./compnents/book/BookPage";
+import Footer from "./compnents/footer/Footer";
+
 function App() {
   return (
-    <div className="h-[100vh] text-3xl text-blue-700 flex items-center justify-center">
-      Book Store
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/book/:id" element={<BookPage />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
