@@ -1,8 +1,7 @@
-import React from "react";
-import Slider from "../../compnents/slider/Slider";
-import Services from "../../compnents/services/Services";
-import HeadingTitle from "../../compnents/heading-title/HeadingTitle";
-import BookSlider from "../../compnents/book-slider/BookSlider";
+import Slider from "../../components/slider/Slider";
+import Services from "../../components/services/Services";
+import HeadingTitle from "../../components/heading-title/HeadingTitle";
+import BookSlider from "../../components/book-slider/BookSlider";
 import { books } from "../../data/books";
 
 const HomePage = () => {

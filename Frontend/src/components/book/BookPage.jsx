@@ -35,7 +35,7 @@ const BookPage = () => {
                   onChange={(e) => setQty(e.target.value)}
                 />
                 <button
-                  onClick={() => addToCart(book, qty)}
+                  onClick={() => console.log("Added")/*addToCart(book, qty)*/}
                   className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 flex items-center"
                 >
                   <i className="bi bi-cart-plus mr-2"></i>
