@@ -14,7 +14,7 @@ const Navbar = ({ toggle, setToggle }) => {
           <span className="text-blue-500">Store</span>
         </Link>
 
-        <ul className="hidden md:flex space-x-8 items-center">
+        <ul className="hidden sm:space-x-5 md:flex space-x-20 items-center">
           <li>
             <Link
               to="/"
@@ -24,15 +24,34 @@ const Navbar = ({ toggle, setToggle }) => {
               Home
             </Link>
           </li>
+         
           <li>
-            <Link
-              to="/authors"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
-            >
-              Authors
-            </Link>
-          </li>
+          <Link
+            to="/Books"
+            onClick={() => setToggle(false)}
+            className="text-gray-600 hover:text-blue-500 transition"
+          >
+            books
+          </Link>
+        </li>
+        <li>
+        <Link
+          to="/authors"
+          onClick={() => setToggle(false)}
+          className="text-gray-600 hover:text-blue-500 transition"
+        >
+          Authors
+        </Link>
+      </li>
+        <li>
+        <Link
+          to="/sellBook"
+          onClick={() => setToggle(false)}
+          className="text-gray-600 hover:text-blue-500 transition"
+        >
+          sell book
+        </Link>
+      </li>
           <li>
             <Link
               to="/about"
@@ -42,15 +61,7 @@ const Navbar = ({ toggle, setToggle }) => {
               About Us
             </Link>
           </li>
-          <li>
-            <Link
-              to="/contact"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
-            >
-              Contact Us
-            </Link>
-          </li>
+       
           <li>
             <Link
               to="/register"
@@ -99,14 +110,42 @@ const Navbar = ({ toggle, setToggle }) => {
             </Link>
           </li>
           <li>
+          <Link
+            to="/Books"
+            onClick={() => setToggle(false)}
+            className="text-gray-600 hover:text-blue-500 transition"
+          >
+            books
+          </Link>
+        </li>
+        <li>
+        <Link
+          to="/authors"
+          onClick={() => setToggle(false)}
+          className="text-gray-600 hover:text-blue-500 transition"
+        >
+          Authors
+        </Link>
+      </li>
+        <li>
+        <Link
+          to="/Sell Book"
+          onClick={() => setToggle(false)}
+          className="text-gray-600 hover:text-blue-500 transition"
+        >
+          sell book
+        </Link>
+      </li>
+          <li>
             <Link
-              to="/authors"
+              to="/about"
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:text-blue-500 transition"
             >
-              Authors
+              About Us
             </Link>
           </li>
+          
           <li>
             <Link
               to="/about"
