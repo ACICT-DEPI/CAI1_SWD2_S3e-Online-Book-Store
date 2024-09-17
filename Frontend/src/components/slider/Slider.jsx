@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import "./slider.css";
 import FirstBook from "../../images/book1.png";
 import SecondBook from "../../images/book2.png";

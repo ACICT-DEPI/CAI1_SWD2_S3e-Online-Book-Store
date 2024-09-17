@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaEye, FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
 import { BsCartPlus } from "react-icons/bs";
-import Modal from "../model/Model";
+import Modal from "../modal/modal";
 import "./book-slider.css";
 import Rating from "./Rating";
 

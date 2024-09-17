@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
-import { BsCart2 } from "react-icons/bs";
+import {
+  BsBook,
+  BsCart2,
+  BsFillPersonFill,
+  BsXLg,
+  BsList,
+} from "react-icons/bs";
 
 const Navbar = ({ toggle, setToggle }) => {
   return (
@@ -10,7 +16,7 @@ const Navbar = ({ toggle, setToggle }) => {
           className="text-xl font-bold flex items-center text-gray-800"
         >
           <span className="text-blue-500">Book</span>
-          <i className="bi bi-book text-2xl mx-1 text-yellow-500"></i>
+          <BsBook className="text-2xl mx-1 text-yellow-500" />
           <span className="text-blue-500">Store</span>
         </Link>
 
@@ -24,34 +30,34 @@ const Navbar = ({ toggle, setToggle }) => {
               Home
             </Link>
           </li>
-         
+
           <li>
-          <Link
-            to="/Books"
-            onClick={() => setToggle(false)}
-            className="text-gray-600 hover:text-blue-500 transition"
-          >
-            books
-          </Link>
-        </li>
-        <li>
-        <Link
-          to="/authors"
-          onClick={() => setToggle(false)}
-          className="text-gray-600 hover:text-blue-500 transition"
-        >
-          Authors
-        </Link>
-      </li>
-        <li>
-        <Link
-          to="/sellBook"
-          onClick={() => setToggle(false)}
-          className="text-gray-600 hover:text-blue-500 transition"
-        >
-          sell book
-        </Link>
-      </li>
+            <Link
+              to="/Books"
+              onClick={() => setToggle(false)}
+              className="text-gray-600 hover:text-blue-500 transition"
+            >
+              books
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/authors"
+              onClick={() => setToggle(false)}
+              className="text-gray-600 hover:text-blue-500 transition"
+            >
+              Authors
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/sellBook"
+              onClick={() => setToggle(false)}
+              className="text-gray-600 hover:text-blue-500 transition"
+            >
+              sell book
+            </Link>
+          </li>
           <li>
             <Link
               to="/about"
@@ -61,7 +67,7 @@ const Navbar = ({ toggle, setToggle }) => {
               About Us
             </Link>
           </li>
-       
+
           <li>
             <Link
               to="/register"
@@ -76,7 +82,7 @@ const Navbar = ({ toggle, setToggle }) => {
               to="/login"
               className="text-gray-600 hover:text-blue-500 transition flex items-center"
             >
-              <i className="bi bi-person-fill mr-2"></i> Login
+              <BsFillPersonFill className="mr-2" /> Login
             </Link>
           </li>
         </ul>
@@ -93,7 +99,7 @@ const Navbar = ({ toggle, setToggle }) => {
             onClick={() => setToggle(!toggle)}
             className="ml-4 md:hidden text-gray-800 text-3xl focus:outline-none"
           >
-            <i className={toggle ? "bi bi-x-lg" : "bi bi-list"}></i>
+            {toggle ? <BsXLg /> : <BsList />}
           </button>
         </div>
       </div>
@@ -110,32 +116,32 @@ const Navbar = ({ toggle, setToggle }) => {
             </Link>
           </li>
           <li>
-          <Link
-            to="/Books"
-            onClick={() => setToggle(false)}
-            className="text-gray-600 hover:text-blue-500 transition"
-          >
-            books
-          </Link>
-        </li>
-        <li>
-        <Link
-          to="/authors"
-          onClick={() => setToggle(false)}
-          className="text-gray-600 hover:text-blue-500 transition"
-        >
-          Authors
-        </Link>
-      </li>
-        <li>
-        <Link
-          to="/Sell Book"
-          onClick={() => setToggle(false)}
-          className="text-gray-600 hover:text-blue-500 transition"
-        >
-          sell book
-        </Link>
-      </li>
+            <Link
+              to="/Books"
+              onClick={() => setToggle(false)}
+              className="text-gray-600 hover:text-blue-500 transition"
+            >
+              books
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/authors"
+              onClick={() => setToggle(false)}
+              className="text-gray-600 hover:text-blue-500 transition"
+            >
+              Authors
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/Sell Book"
+              onClick={() => setToggle(false)}
+              className="text-gray-600 hover:text-blue-500 transition"
+            >
+              sell book
+            </Link>
+          </li>
           <li>
             <Link
               to="/about"
@@ -145,7 +151,7 @@ const Navbar = ({ toggle, setToggle }) => {
               About Us
             </Link>
           </li>
-          
+
           <li>
             <Link
               to="/about"
@@ -179,7 +185,7 @@ const Navbar = ({ toggle, setToggle }) => {
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:text-blue-500 transition flex items-center"
             >
-              <i className="bi bi-person-fill mr-2"></i> Login
+              <BsFillPersonFill className="mr-2" /> Login
             </Link>
           </li>
         </ul>

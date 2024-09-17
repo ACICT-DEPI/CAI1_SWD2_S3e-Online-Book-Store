@@ -3,6 +3,13 @@ import { books } from "../../data/books";
 
 import { useState } from "react";
 
+import {
+  BsCalendar3,
+  BsCartPlus,
+  BsFileEarmarkBreak,
+  BsGlobe,
+} from "react-icons/bs";
+
 const BookPage = () => {
   const { id } = useParams();
   const [qty, setQty] = useState(1);
@@ -35,10 +42,10 @@ const BookPage = () => {
                   onChange={(e) => setQty(e.target.value)}
                 />
                 <button
-                  onClick={() => console.log("Added")/*addToCart(book, qty)*/}
+                  onClick={() => console.log("Added") /*addToCart(book, qty)*/}
                   className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 flex items-center"
                 >
-                  <i className="bi bi-cart-plus mr-2"></i>
+                  <BsCartPlus />
                   Add To Cart
                 </button>
               </div>
@@ -61,7 +68,7 @@ const BookPage = () => {
         </div>
         <div className="bg-gray-100 p-6 grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           <div className="flex items-center space-x-3">
-            <i className="bi bi-file-earmark-break text-gray-600 text-xl"></i>
+            <BsFileEarmarkBreak className="text-gray-600 text-xl" />
             <div>
               <small className="text-gray-500">Print Length</small>
               <p className="text-gray-700 font-semibold">
@@ -70,14 +77,14 @@ const BookPage = () => {
             </div>
           </div>
           <div className="flex items-center space-x-3">
-            <i className="bi bi-globe text-gray-600 text-xl"></i>
+            <BsGlobe className="text-gray-600 text-xl" />
             <div>
               <small className="text-gray-500">Language</small>
               <p className="text-gray-700 font-semibold">{book.language}</p>
             </div>
           </div>
           <div className="flex items-center space-x-3">
-            <i className="bi bi-calendar3 text-gray-600 text-xl"></i>
+            <BsCalendar3 className="text-gray-600 text-xl" />
             <div>
               <small className="text-gray-500">Publication Date</small>
               <p className="text-gray-700 font-semibold">

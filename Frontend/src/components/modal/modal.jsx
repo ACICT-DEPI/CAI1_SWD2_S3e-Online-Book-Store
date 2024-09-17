@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import Rating from "../book-slider/Rating";
-import { useState, useContext } from "react";
+import { useState } from "react";
 
-import { IoCartOutline } from "react-icons/io5";
+import { BsXCircleFill, BsCartPlus } from "react-icons/bs";
 
 const Modal = ({ bookData, setOpenModal }) => {
   const [qty, setQty] = useState(1);
@@ -23,7 +23,7 @@ const Modal = ({ bookData, setOpenModal }) => {
           onClick={() => setOpenModal(false)}
           className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
         >
-          <i className="bi bi-x-circle-fill text-2xl"></i>
+          <BsXCircleFill className="text-2xl" />
         </button>
         <div className="flex flex-col md:flex-row">
           <div className="w-full md:w-1/3 flex justify-center">
@@ -59,7 +59,7 @@ const Modal = ({ bookData, setOpenModal }) => {
                 className="border border-gray-300 rounded-lg px-3 py-2 mr-4 w-20 text-center"
               />
               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center">
-                <IoCartOutline size={20} /> Add To Cart
+                <BsCartPlus size={20} /> Add To Cart
               </button>
             </div>
             <Link

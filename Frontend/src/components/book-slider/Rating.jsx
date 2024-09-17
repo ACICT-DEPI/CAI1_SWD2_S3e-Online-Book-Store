@@ -1,41 +1,48 @@
+import { FaRegStar, FaStar, FaRegStarHalfStroke } from "react-icons/fa6";
+
 const Rating = ({ rating, reviews }) => {
   return (
-    <div className="rating">
+    <div className="rating flex items-center">
       {rating >= 1 ? (
-        <i className="bi bi-star-fill"></i>
-      ) : rating >= 0.5 ? (
-        <i className="bi bi-star-half"></i>
+        <FaStar size={25} className="mx-[3px]" />
+      ) : rating >= 0.5 && rating <= 1 ? (
+        <FaRegStarHalfStroke size={25} className="mx-[3px]" />
       ) : (
-        <i className="bi bi-star"></i>
+        <FaRegStar size={25} className="mx-[3px]" />
       )}
+
       {rating >= 2 ? (
-        <i className="bi bi-star-fill"></i>
-      ) : rating >= 1.5 ? (
-        <i className="bi bi-star-half"></i>
+        <FaStar size={25} className="mx-[3px]" />
+      ) : rating >= 1.5 && rating <= 2 ? (
+        <FaRegStarHalfStroke size={25} className="mx-[3px]" />
       ) : (
-        <i className="bi bi-star"></i>
+        <FaRegStar size={25} className="mx-[3px]" />
       )}
+
       {rating >= 3 ? (
-        <i className="bi bi-star-fill"></i>
-      ) : rating >= 2.5 ? (
-        <i className="bi bi-star-half"></i>
+        <FaStar size={25} className="mx-[3px]" />
+      ) : rating >= 2.5 && rating <= 3 ? (
+        <FaRegStarHalfStroke size={25} className="mx-[3px]" />
       ) : (
-        <i className="bi bi-star"></i>
+        <FaRegStar size={25} className="mx-[3px]" />
       )}
+
       {rating >= 4 ? (
-        <i className="bi bi-star-fill"></i>
-      ) : rating >= 3.5 ? (
-        <i className="bi bi-star-half"></i>
+        <FaStar size={25} className="mx-[3px]" />
+      ) : rating >= 3.5 && rating <= 4 ? (
+        <FaRegStarHalfStroke size={25} className="mx-[3px]" />
       ) : (
-        <i className="bi bi-star"></i>
+        <FaRegStar size={25} className="mx-[3px]" />
       )}
+
       {rating >= 5 ? (
-        <i className="bi bi-star-fill"></i>
-      ) : rating >= 4.5 ? (
-        <i className="bi bi-star-half"></i>
+        <FaStar size={25} className="mx-[3px]" />
+      ) : rating >= 4.5 && rating <= 5 ? (
+        <FaRegStarHalfStroke size={25} className="mx-[3px]" />
       ) : (
-        <i className="bi bi-star"></i>
+        <FaRegStar size={25} className="mx-[3px]" />
       )}
+
       <span>{rating}</span>
       <span>({reviews} reviews)</span>
     </div>

@@ -6,7 +6,7 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <header className="header">
+    <header>
       <Navbar setToggle={setToggle} toggle={toggle} />
     </header>
   );
