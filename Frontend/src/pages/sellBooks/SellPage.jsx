@@ -1,10 +1,7 @@
-import Slider from "../../components/slider/Slider";
-
 export default function SellPage() {
   return (
     <div>
-      <Slider />
-      <div className="bg-white w-3/4 h-2/3 mx-auto my-20  rounded-md   flex flex-col">
+      <div className="bg-white w-3/4 h-2/3 mx-auto my-8 rounded-md flex flex-col">
         <div className="bg-slate-50 w-full h-24 rounded-t-md flex items-center justify-center">
           <h1 className="text-4xl text-gray-500 font-sans text-center ">
             Sell Book
