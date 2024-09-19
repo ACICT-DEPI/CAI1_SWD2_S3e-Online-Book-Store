@@ -10,6 +10,7 @@ import SellPage from "../pages/sellBooks/SellPage";
 import RootLayout from "./../pages/Layout";
 import ErrorHandler from "./../components/errors/ErrorHandler";
 import PageNotFound from "./../pages/PageNotFound";
+import RegisterPage from "../pages/Registerpage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,7 +19,7 @@ const router = createBrowserRouter(
         <Route index element={<HomePage />} />
         <Route path="/book/:id" element={<BookPage />} />
         <Route path="/sellBook" element={<SellPage />} />
-        {/* <Route path="/register" element={<RegisterPage />} /> */}
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </>
