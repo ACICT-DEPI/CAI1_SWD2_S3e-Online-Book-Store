@@ -134,42 +134,23 @@ const Navbar = ({ toggle, setToggle }) => {
             </Link>
           </li>
           <li>
-            <Link
-              to="/Sell Book"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
-            >
-              sell book
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/about"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
-            >
-              About Us
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              to="/about"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
-            >
-              About Us
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/contact"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
-            >
-              Contact Us
-            </Link>
-          </li>
+          <Link
+            to="/sellBook"
+            onClick={() => setToggle(false)}
+            className="text-gray-600 hover:text-blue-500 transition"
+          >
+            sell book
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/about"
+            onClick={() => setToggle(false)}
+            className="text-gray-600 hover:text-blue-500 transition"
+          >
+            About Us
+          </Link>
+        </li>
           <li>
             <Link
               to="/register"
