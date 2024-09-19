@@ -1,6 +1,6 @@
 import Book from "../models/book.model.js";
 
-export const getCartProducts = async (req, res) => {
+export const getCartBooks = async (req, res) => {
   try {
     const books = await Book.find({ _id: { $in: req.user.cartItems } });
 
@@ -13,7 +13,7 @@ export const getCartProducts = async (req, res) => {
 
     res.json(cartItems);
   } catch (error) {
-    console.log("Error in getCartProducts controller", error.message);
+    console.log("Error in getCartBooks controller", error.message);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
@@ -72,7 +72,7 @@ export const updateQuantity = async (req, res) => {
       await user.save();
       res.json(user.cartItems);
     } else {
-      res.status(404).json({ message: "Product not found" });
+      res.status(404).json({ message: "Book not found" });
     }
   } catch (error) {
     console.log("Error in updateQuantity controller", error.message);

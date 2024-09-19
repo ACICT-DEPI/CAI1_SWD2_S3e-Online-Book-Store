@@ -18,6 +18,7 @@ const router = createBrowserRouter(
         <Route index element={<HomePage />} />
         <Route path="/book/:id" element={<BookPage />} />
         <Route path="/sellBook" element={<SellPage />} />
+        {/* <Route path="/register" element={<RegisterPage />} /> */}
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </>

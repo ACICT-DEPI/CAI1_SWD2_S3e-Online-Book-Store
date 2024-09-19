@@ -1,8 +1,11 @@
-const Input = ({ icon: Icon, ref, ...rest }) => {
+import { forwardRef } from "react";
+
+// eslint-disable-next-line react/display-name
+const Input = forwardRef(({ icon: Icon, ...rest }, ref) => {
   return (
-    <div className="relative mb-3">
+    <div className="relative">
       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        {Icon ? <Icon className="size-5 text-blue-500" /> : null}
+        {Icon ? <Icon /> : null}
       </div>
       <input
         ref={ref}
@@ -13,5 +16,5 @@ const Input = ({ icon: Icon, ref, ...rest }) => {
       />
     </div>
   );
-};
+});
 export default Input;
