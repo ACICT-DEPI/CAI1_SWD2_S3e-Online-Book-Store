@@ -8,7 +8,7 @@ import { connectDB } from "./db/connectDB.js";
 
 import authRoutes from "./routes/auth.route.js";
 import bookRoutes from "./routes/book.router.js";
-// import cartRoutes from "./routes/cart.route.js";
+import cartRoutes from "./routes/cart.route.js";
 // import paymentRoutes from "./routes/payment.route.js";
 
 dotenv.config();
@@ -25,7 +25,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
-// app.use("/api/cart", cartRoutes);
+app.use("/api/cart", cartRoutes);
 // app.use("/api/payments", paymentRoutes);
 
 if (process.env.NODE_ENV === "production") {
