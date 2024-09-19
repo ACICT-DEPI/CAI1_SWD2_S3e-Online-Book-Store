@@ -1,3 +1,4 @@
+
 import Slider from "../../components/slider/Slider";
 import SellForm from "../../components/Sell Form/SellForm";
 export default function SellPage() {
