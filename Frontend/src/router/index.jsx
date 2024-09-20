@@ -11,6 +11,7 @@ import RootLayout from "./../pages/Layout";
 import ErrorHandler from "./../components/errors/ErrorHandler";
 import PageNotFound from "./../pages/PageNotFound";
 import RegisterPage from "../pages/Registerpage";
+import LoginPage from "../pages/LoginPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
         <Route index element={<HomePage />} />
         <Route path="/book/:id" element={<BookPage />} />
         <Route path="/sellBook" element={<SellPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />

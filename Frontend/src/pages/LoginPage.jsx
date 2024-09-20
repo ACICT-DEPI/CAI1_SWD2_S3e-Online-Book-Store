@@ -1,16 +1,17 @@
+/* eslint-disable react/no-unescaped-entities */
 import { LuLoader } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { useForm } from "react-hook-form";
-import { registerSchema } from "../validation";
+import { loginSchema } from "../validation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { REGISTER_FORM } from "../data/index";
+import { LOGIN_FORM } from "../data/index";
 import InputErrorMessage from "../components/ui/InputErrorMessage";
 import toast from "react-hot-toast";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
 
   const {
@@ -18,16 +19,17 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(registerSchema),
+    resolver: yupResolver(loginSchema),
   });
 
-  const { signup, isLoading } = useAuthStore();
+  const { login, isLoading } = useAuthStore();
 
-  const handleSignUp = async (data) => {
+  const handleLogin = async (data) => {
+    console.log(data);
     try {
-      await signup(data);
+      await login(data);
       toast.success(
-        "You will navigate to the login page after 2 seconds to login!",
+        "You will navigate to the home page after 2 seconds to login!",
         {
           position: "top-center",
           duration: 1500,
@@ -66,7 +68,7 @@ const RegisterPage = () => {
     }
   };
   // ** Renders
-  const renderRegisterForm = REGISTER_FORM.map((input, idx) => (
+  const renderRegisterForm = LOGIN_FORM.map((input, idx) => (
     <div key={idx}>
       <Input
         icon={input.icon}
@@ -87,10 +89,18 @@ const RegisterPage = () => {
     >
       <div className="p-8">
         <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-blue-500 text-transparent bg-clip-text">
-          Create Account
+          Welcome Back
         </h2>
-        <form className="space-y-4" onSubmit={handleSubmit(handleSignUp)}>
+        <form className="space-y-4" onSubmit={handleSubmit(handleLogin)}>
           {renderRegisterForm}
+          <div className="flex items-center mb-6">
+            <Link
+              to="/forgot-password"
+              className="text-sm text-blue-400 hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
           <Button
             className="mt-5 w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white 
 						font-bold rounded-lg shadow-lg hover:from-blue-600
@@ -101,20 +111,20 @@ const RegisterPage = () => {
             {isLoading ? (
               <LuLoader className="animate-spin mx-auto" size={24} />
             ) : (
-              "Sign Up"
+              "Login"
             )}
           </Button>
         </form>
       </div>
       <div className="px-8 py-4 bg-gray-300 bg-opacity-50 flex justify-center">
         <p className="text-sm text-gray-800">
-          Already have an account?{" "}
-          <Link to={"/login"} className="text-blue-400 hover:underline">
-            Login
+          Don't have an account?{" "}
+          <Link to="/register" className="text-blue-400 hover:underline">
+            Sign up
           </Link>
         </p>
       </div>
     </div>
   );
 };
-export default RegisterPage;
+export default LoginPage;

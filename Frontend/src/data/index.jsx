@@ -30,11 +30,13 @@ export const LOGIN_FORM = [
     type: "text",
     placeholder: "Email",
     validation: { required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}/ },
+    icon: () => <LuMail className="size-5 text-blue-500" />,
   },
   {
     name: "password",
     type: "password",
     placeholder: "Password",
     validation: { required: true, minLength: 6 },
+    icon: () => <LuLock className="size-5 text-blue-500" />,
   },
 ];
