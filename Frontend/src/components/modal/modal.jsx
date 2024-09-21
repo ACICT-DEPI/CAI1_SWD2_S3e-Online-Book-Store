@@ -1,14 +1,15 @@
+import "./Modal.css";
+import Rating from "../../components/book-slider/Rating"; 
 import { Link } from "react-router-dom";
-import Rating from "../book-slider/Rating";
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import CartContext from "../../context/cartContext";
 import { BsXCircleFill, BsCartPlus } from "react-icons/bs";
 
 const Modal = ({ bookData, setOpenModal }) => {
+  const { addToCart } = useContext(CartContext);
   const [qty, setQty] = useState(1);
 
-  const { title, image, author, price, rating, reviews, inStock, id } =
-    bookData;
+  const { title, image, author, price, rating, reviews, inStock, id } = bookData;
 
   return (
     <div
@@ -58,7 +59,10 @@ const Modal = ({ bookData, setOpenModal }) => {
                 onChange={(e) => setQty(e.target.value)}
                 className="border border-gray-300 rounded-lg px-3 py-2 mr-4 w-20 text-center"
               />
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center">
+              <button
+                onClick={() => addToCart({ ...bookData, quantity: qty })}
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center"
+              >
                 <BsCartPlus size={20} /> Add To Cart
               </button>
             </div>

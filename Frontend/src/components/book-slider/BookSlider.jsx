@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
 import { BsCartPlus } from "react-icons/bs";
 import Modal from "../modal/modal";
 import "./book-slider.css";
 import Rating from "./Rating";
+import CartContext from "../../context/cartContext";
 
 const BookSlider = ({ data }) => {
+  const { addToCart } = useContext(CartContext); 
   const [slideIndex, setSlideIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [bookData, setBookData] = useState(null);
@@ -59,6 +61,7 @@ const BookSlider = ({ data }) => {
               <BsCartPlus
                 size={20}
                 color="black"
+                onClick={() => addToCart({ ...item, quantity: 1 })} // Add item to cart
                 className="book-slider-icon flex"
               />
             </div>
