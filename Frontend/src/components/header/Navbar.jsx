@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
   BsBook,
@@ -6,8 +7,11 @@ import {
   BsXLg,
   BsList,
 } from "react-icons/bs";
+import CartContext from "../../context/cartContext"; 
 
 const Navbar = ({ toggle, setToggle }) => {
+  const { cartItemsLength } = useContext(CartContext); 
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-lg z-50 p-3">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -30,14 +34,13 @@ const Navbar = ({ toggle, setToggle }) => {
               Home
             </NavLink>
           </li>
-
           <li>
             <NavLink
               to="/Books"
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:text-blue-500 transition"
             >
-              books
+              Books
             </NavLink>
           </li>
           <li>
@@ -55,7 +58,7 @@ const Navbar = ({ toggle, setToggle }) => {
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:text-blue-500 transition"
             >
-              sell book
+              Sell Book
             </NavLink>
           </li>
           <li>
@@ -67,7 +70,6 @@ const Navbar = ({ toggle, setToggle }) => {
               About Us
             </NavLink>
           </li>
-
           <li>
             <NavLink
               to="/register"
@@ -80,6 +82,7 @@ const Navbar = ({ toggle, setToggle }) => {
           <li>
             <NavLink
               to="/login"
+              onClick={() => setToggle(false)}
               className="text-gray-600 hover:text-blue-500 transition flex items-center"
             >
               <BsFillPersonFill className="mr-2" /> Login
@@ -92,6 +95,11 @@ const Navbar = ({ toggle, setToggle }) => {
             to="/cart"
             className="relative flex items-center text-gray-600 hover:text-blue-500 transition"
           >
+            {cartItemsLength > 0 && (
+              <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                {cartItemsLength}
+              </span>
+            )}
             <BsCart2 size={30} />
           </NavLink>
 
@@ -121,7 +129,7 @@ const Navbar = ({ toggle, setToggle }) => {
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:text-blue-500 transition"
             >
-              books
+              Books
             </NavLink>
           </li>
           <li>
@@ -134,25 +142,24 @@ const Navbar = ({ toggle, setToggle }) => {
             </NavLink>
           </li>
           <li>
-
-          <Link
-            to="/sellBook"
-            onClick={() => setToggle(false)}
-            className="text-gray-600 hover:text-blue-500 transition"
-          >
-            sell book
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/about"
-            onClick={() => setToggle(false)}
-            className="text-gray-600 hover:text-blue-500 transition"
-          >
-            About Us
-          </Link>
-        </li>
-        <li>
+            <NavLink
+              to="/sellBook"
+              onClick={() => setToggle(false)}
+              className="text-gray-600 hover:text-blue-500 transition"
+            >
+              Sell Book
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              onClick={() => setToggle(false)}
+              className="text-gray-600 hover:text-blue-500 transition"
+            >
+              About Us
+            </NavLink>
+          </li>
+          <li>
             <NavLink
               to="/register"
               onClick={() => setToggle(false)}
