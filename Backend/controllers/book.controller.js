@@ -68,8 +68,14 @@ export const updateBook = async (req, res) => {
     language,
     PublicationDate,
     inStock,
-    author,
+    image,
   } = req.body;
+
+  if (image) {
+    cloudinaryResponse = await cloudinary.uploader.upload(image, {
+      folder: "books",
+    });
+  }
 
   book.title = title;
   book.description = description;
@@ -79,7 +85,6 @@ export const updateBook = async (req, res) => {
   book.language = language;
   book.PublicationDate = PublicationDate;
   book.inStock = inStock;
-  book.author = author;
   await book.save();
 
   res.status(201).json({ book });
