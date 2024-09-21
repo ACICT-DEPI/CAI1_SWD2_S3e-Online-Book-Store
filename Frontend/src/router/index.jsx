@@ -12,6 +12,7 @@ import ErrorHandler from "./../components/errors/ErrorHandler";
 import PageNotFound from "./../pages/PageNotFound";
 import RegisterPage from "../pages/Registerpage";
 import LoginPage from "../pages/LoginPage";
+import CartPage from "../pages/cart/Cart";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
         <Route path="/sellBook" element={<SellPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </>
