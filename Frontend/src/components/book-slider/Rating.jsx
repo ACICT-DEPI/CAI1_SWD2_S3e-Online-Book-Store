@@ -1,6 +1,6 @@
 import { FaRegStar, FaStar, FaRegStarHalfStroke } from "react-icons/fa6";
 
-const Rating = ({ rating, reviews }) => {
+const Rating = ({ rating }) => {
   return (
     <div className="rating flex items-center">
       {rating >= 1 ? (
@@ -44,7 +44,6 @@ const Rating = ({ rating, reviews }) => {
       )}
 
       <span>{rating}</span>
-      <span>({reviews} reviews)</span>
     </div>
   );
 };

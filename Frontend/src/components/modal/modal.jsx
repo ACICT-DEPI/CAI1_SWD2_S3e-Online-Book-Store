@@ -7,7 +7,7 @@ import { useCartStore } from "../../store/cartStore";
 const Modal = ({ bookData, setOpenModal }) => {
   const { addToCart } = useCartStore();
 
-  const { title, image, author, price, rating, reviews, inStock, _id } =
+  const { title, image, authorName, price, rating, reviews, inStock, _id } =
     bookData;
 
   return (
@@ -40,7 +40,7 @@ const Modal = ({ bookData, setOpenModal }) => {
             </p>
             <Rating rating={rating} reviews={reviews} />
             <p className="text-lg mb-2">
-              <strong>Author:</strong> {author}
+              <strong>Author:</strong> {authorName}
             </p>
             <p className="text-lg mb-4">
               <strong>Price:</strong> ${price}

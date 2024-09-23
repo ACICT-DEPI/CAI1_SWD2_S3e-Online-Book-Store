@@ -1,13 +1,11 @@
-import { FaEye, FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
-import { BsCartPlus } from "react-icons/bs";
+import { FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
+
 import Modal from "../modal/modal";
 import "./book-slider.css";
-import Rating from "./Rating";
-import { useCartStore } from './../../store/cartStore';
 import { useState } from "react";
+import BookCard from "../BookCard";
 
 const BookSlider = ({ data }) => {
-  const { addToCart } = useCartStore();
   const [slideIndex, setSlideIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [bookData, setBookData] = useState(null);
@@ -40,30 +38,11 @@ const BookSlider = ({ data }) => {
         className="book-slider-wrapper"
       >
         {data.map((item) => (
-          <div key={item._id} className="book-slide-item">
-            <img
-              src={item.image}
-              alt={item.title}
-              className="book-slide-item-img"
-            />
-            <h3 className="book-slide-item-title">{item.title}</h3>
-            <Rating rating={item.rating} reviews={item.reviews} />
-            <div className="book-slider-item-price">${item.price}</div>
-            <div className="book-slider-icons-wrapper flex text-center justify-center gap-4 cursor-pointer">
-              <FaEye
-                size={20}
-                color="black"
-                onClick={() => handleOpenModal(item)}
-                className="book-slider-icon"
-              />
-              <BsCartPlus
-                size={20}
-                color="black"
-                onClick={() => addToCart(item)}
-                className="book-slider-icon flex"
-              />
-            </div>
-          </div>
+          <BookCard
+            key={item._id}
+            book={item}
+            handleOpenModal={handleOpenModal}
+          />
         ))}
       </div>
       {slideIndex < data.length - 4 && (
@@ -80,4 +59,3 @@ const BookSlider = ({ data }) => {
 };
 
 export default BookSlider;
-
