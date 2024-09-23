@@ -1,18 +1,17 @@
-import { useContext, useState } from "react";
 import { FaEye, FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
 import { BsCartPlus } from "react-icons/bs";
 import Modal from "../modal/modal";
 import "./book-slider.css";
 import Rating from "./Rating";
-import CartContext from "../../context/cartContext";
+import { useCartStore } from './../../store/cartStore';
+import { useState } from "react";
 
 const BookSlider = ({ data }) => {
-  const { addToCart } = useContext(CartContext); 
+  const { addToCart } = useCartStore();
   const [slideIndex, setSlideIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [bookData, setBookData] = useState(null);
 
-  // Handle Click
   const handleClick = (direction) => {
     if (direction === "left" && slideIndex > 0) {
       setSlideIndex(slideIndex - 1);
@@ -21,7 +20,6 @@ const BookSlider = ({ data }) => {
     }
   };
 
-  // Handle Modal
   const handleOpenModal = (item) => {
     setOpenModal(true);
     setBookData(item);
@@ -38,13 +36,13 @@ const BookSlider = ({ data }) => {
         />
       )}
       <div
-        style={{ transform: `translateX(${slideIndex * -340}px)` }}
+        style={{ transform: `translateX(${slideIndex * -360}px)` }}
         className="book-slider-wrapper"
       >
         {data.map((item) => (
-          <div key={item.id} className="book-slide-item">
+          <div key={item._id} className="book-slide-item">
             <img
-              src={`/books/${item.image}`}
+              src={item.image}
               alt={item.title}
               className="book-slide-item-img"
             />
@@ -61,14 +59,14 @@ const BookSlider = ({ data }) => {
               <BsCartPlus
                 size={20}
                 color="black"
-                onClick={() => addToCart({ ...item, quantity: 1 })} // Add item to cart
+                onClick={() => addToCart(item)}
                 className="book-slider-icon flex"
               />
             </div>
           </div>
         ))}
       </div>
-      {slideIndex < data.length - 1 && (
+      {slideIndex < data.length - 4 && (
         <FaCircleArrowRight
           size={30}
           color="black"
@@ -82,3 +80,4 @@ const BookSlider = ({ data }) => {
 };
 
 export default BookSlider;
+

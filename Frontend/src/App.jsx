@@ -6,8 +6,12 @@ import { useAuthStore } from "./store/authStore";
 import { useCartStore } from "./store/cartStore";
 
 function App() {
-  const { user } = useAuthStore();
+  const { checkAuth, user } = useAuthStore();
   const { getCartItems } = useCartStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   useEffect(() => {
     if (!user) return;

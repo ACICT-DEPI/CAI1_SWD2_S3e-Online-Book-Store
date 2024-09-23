@@ -1,56 +1,59 @@
-const CartItem = ({ item, addToCart, removeFromCart }) => {
-  const { image, title, author, quantity, price, id } = item;
+import { useCartStore } from "../../store/cartStore";
+import { LuMinus, LuPlus, LuTrash } from "react-icons/lu";
 
-  const handleDecreaseQuantity = () => {
-    if (quantity > 1) {
-      addToCart({ ...item, quantity: item.quantity - 1 });
-    } else {
-      removeFromCart(id);
-    }
-  };
+const Cartbook = ({ book }) => {
+  const { removeFromCart, updateQuantity } = useCartStore();
 
   return (
-    <div className="flex items-start justify-between border-b border-gray-300 p-4">
-      <div className="flex flex-col items-start"> 
-        <img
-          src={`/books/${image}`}
-          alt={title}
-          className="w-24 h-32 object-cover"
-        />
-        <div className="mt-2 flex flex-col">
-          <div className="font-semibold">{title}</div>
-          <div className="text-gray-600">{author}</div>
+    <div className="rounded-lg border p-4 shadow-sm border-gray-300 bg-gray-200 md:p-6">
+      <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
+        <div className="shrink-0 md:order-1">
+          <img className="h-20 md:h-32 rounded object-cover" src={book.image} />
         </div>
-      </div>
+        <div className="flex items-center justify-between md:order-3 md:justify-end">
+          <div className="flex books-center gap-2">
+            <button
+              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border
+							border-gray-900 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2
+							focus:ring-blue-500"
+              onClick={() => updateQuantity(book._id, book.quantity - 1)}
+            >
+              <LuMinus className="text-gray-900" />
+            </button>
+            <p>{book.quantity}</p>
+            <button
+              className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border
+							border-gray-900 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2
+							focus:ring-blue-500"
+              onClick={() => updateQuantity(book._id, book.quantity + 1)}
+            >
+              <LuPlus className="text-gray-900" />
+            </button>
+          </div>
 
-      <div className="flex flex-col items-end "> 
-        <span className="text-lg mr-7">${price.toFixed(2)}</span>
-      </div>
-
-      <div className="flex flex-col items-end mr-7">
-        <div className="flex items-center gap-4">
-          <button
-            className="bg-blue-600 text-white py-1 px-2 rounded"
-            onClick={() => addToCart({ ...item, quantity: item.quantity + 1 })}
-          >
-            +
-          </button>
-          <span className="text-lg">{quantity}</span>
-          <button
-            className="bg-blue-600 text-white py-1 px-2 rounded"
-            disabled={quantity <= 0}
-            onClick={handleDecreaseQuantity}
-          >
-            -
-          </button>
+          <div className="text-end md:order-4 md:w-32">
+            <p className="text-base font-bold text-blue-500">${book.price}</p>
+          </div>
         </div>
-      </div>
 
-      <div className="flex flex-col items-end ml-2"> 
-        <span className="text-lg">${(price * quantity).toFixed(2)}</span>
+        <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+          <p className="text-base font-medium text-gray-900 hover:text-blue-500">
+            {book.title}
+          </p>
+          <p className="text-sm text-gray-900">{book.description}</p>
+
+          <div className="flex items-center gap-4">
+            <button
+              className="inline-flex books-center text-sm font-medium text-red-600
+							hover:text-red-700 hover:underline"
+              onClick={() => removeFromCart(book._id)}
+            >
+              <LuTrash size={20} />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-
-export default CartItem;
+export default Cartbook;
