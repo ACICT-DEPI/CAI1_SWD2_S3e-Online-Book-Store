@@ -14,7 +14,12 @@ export const useCartStore = create((set, get) => ({
       get().calculateTotals();
     } catch (error) {
       set({ cart: [] });
-      toast.error(error.response.data.message || "An error occurred");
+      toast.error(error.response.data.message || "An error occurred", {
+        style: {
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     }
   },
 
@@ -26,7 +31,12 @@ export const useCartStore = create((set, get) => ({
   addToCart: async (book) => {
     try {
       await axios.post("/cart", { bookId: book._id });
-      toast.success("Book added to cart");
+      toast.success("Book added to cart", {
+        style: {
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
       set((prevState) => {
         const existingItem = prevState.cart.find(
           (item) => item._id === book._id
@@ -42,7 +52,12 @@ export const useCartStore = create((set, get) => ({
       });
       get().calculateTotals();
     } catch (error) {
-      toast.error(error.response.data.message || "An error occurred");
+      toast.error(error.response.data.message || "An error occurred", {
+        style: {
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     }
   },
 

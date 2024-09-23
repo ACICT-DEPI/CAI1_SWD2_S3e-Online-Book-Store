@@ -1,9 +1,14 @@
+import { useState } from "react";
+import Modal from "../../components/ui/Modal";
 import { useCartStore } from "../../store/cartStore";
 import { LuMinus, LuPlus, LuTrash } from "react-icons/lu";
+import Button from "./../../components/ui/Button";
 
 const Cartbook = ({ book }) => {
   const { removeFromCart, updateQuantity } = useCartStore();
-
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const openDeleteModal = () => setIsDeleteModalOpen(true);
+  const closeDeleteModal = () => setIsDeleteModalOpen(false);
   return (
     <div className="rounded-lg border p-4 shadow-sm border-gray-300 bg-gray-200 md:p-6">
       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
@@ -46,12 +51,35 @@ const Cartbook = ({ book }) => {
             <button
               className="inline-flex books-center text-sm font-medium text-red-600
 							hover:text-red-700 hover:underline"
-              onClick={() => removeFromCart(book._id)}
+              onClick={openDeleteModal}
             >
               <LuTrash size={20} />
             </button>
           </div>
         </div>
+        <Modal
+          isOpen={isDeleteModalOpen}
+          closeModal={closeDeleteModal}
+          title="Are you sure you want to remove this book from your cart?"
+          description="Deleting this book will remove it from your cart. Any associated data, other related information will also be deleted. Please make sure this is the intended action."
+        >
+          <div className="flex items-center space-x-3 mt-4">
+            <Button
+              className="bg-red-700 hover:bg-red-800 p-2 w-full"
+              onClick={() => {
+                removeFromCart(book._id);
+              }}
+            >
+              Yes, remove
+            </Button>
+            <Button
+              className="bg-gray-400 hover:bg-gray-500 p-2 w-full"
+              onClick={closeDeleteModal}
+            >
+              Cancle
+            </Button>
+          </div>
+        </Modal>
       </div>
     </div>
   );
