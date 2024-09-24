@@ -1,22 +1,25 @@
-import { RouterProvider } from "react-router-dom";
-import router from "./router";
 import { Toaster } from "react-hot-toast";
-import { useEffect } from "react";
+import router from "./router/index";
+import { RouterProvider } from "react-router-dom";
 import { useAuthStore } from "./store/authStore";
+import { useEffect } from "react";
+import LoadingSpinner from "./components/LoadingSpinner";
 import { useCartStore } from "./store/cartStore";
 
 function App() {
-  const { checkAuth, user } = useAuthStore();
+  const { isCheckingAuth, checkAuth, user } = useAuthStore();
   const { getCartItems } = useCartStore();
-
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
   useEffect(() => {
     if (!user) return;
+
     getCartItems();
   }, [getCartItems, user]);
+
+  if (isCheckingAuth) return <LoadingSpinner />;
 
   return (
     <div>

@@ -17,23 +17,95 @@ import Authors from "./../pages/authors/Authors";
 import ForgotPasswordPage from "./../pages/ForgotPasswordPage";
 import ResetPasswordPage from "./../pages/ResetPasswordPage";
 import EmailVerificationPage from "./../pages/EmailVerificationPage";
-import BooksPage from './../pages/Books/Books';
+import BooksPage from "./../pages/Books/Books";
+import ProtectedRoute from "./../components/auth/ProtectedRoute";
+import RedirectAuthenticatedUser from "./../components/auth/RedirectAuthenticatedUser";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<RootLayout />} errorElement={<ErrorHandler />}>
-        <Route index element={<HomePage />} />
-        <Route path="/book/:id" element={<BookPage />} />
-        <Route path="/sellBook" element={<SellPage />} />
-        <Route path="/Books" element={<BooksPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/authors" element={<Authors />} />
+        <Route
+          path="/register"
+          element={
+            <RedirectAuthenticatedUser>
+              <RegisterPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RedirectAuthenticatedUser>
+              <LoginPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
         <Route path="/verify-email" element={<EmailVerificationPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+        <Route
+          path="/forgot-password"
+          element={
+            <RedirectAuthenticatedUser>
+              <ForgotPasswordPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+        <Route
+          path="/reset-password/:token"
+          element={
+            <RedirectAuthenticatedUser>
+              <ResetPasswordPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+        <Route
+          index
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/book/:id"
+          element={
+            <ProtectedRoute>
+              <BookPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/sellBook"
+          element={
+            <ProtectedRoute>
+              <SellPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Books"
+          element={
+            <ProtectedRoute>
+              <BooksPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/authors"
+          element={
+            <ProtectedRoute>
+              <Authors />
+            </ProtectedRoute>
+          }
+        />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </>
