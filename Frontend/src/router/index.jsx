@@ -17,6 +17,7 @@ import Authors from "./../pages/authors/Authors";
 import ForgotPasswordPage from "./../pages/ForgotPasswordPage";
 import ResetPasswordPage from "./../pages/ResetPasswordPage";
 import EmailVerificationPage from "./../pages/EmailVerificationPage";
+import BooksPage from './../pages/Books/Books';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

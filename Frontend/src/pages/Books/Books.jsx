@@ -1,6 +1,4 @@
-import React from 'react'
 import BookShow from '../../components/book/BookShow'
-import { BsTypeH3 } from 'react-icons/bs'
 
 export default function BooksPage() {
   return (
