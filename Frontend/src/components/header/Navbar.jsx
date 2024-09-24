@@ -33,7 +33,7 @@ const Navbar = ({ toggle, setToggle }) => {
               to="/"
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
-							transition duration-300 ease-in-out flex items-center"
+              transition duration-300 ease-in-out flex items-center"
             >
               Home
             </NavLink>
@@ -41,7 +41,7 @@ const Navbar = ({ toggle, setToggle }) => {
               to="/Books"
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
-							transition duration-300 ease-in-out flex items-center"
+              transition duration-300 ease-in-out flex items-center"
             >
               Books
             </NavLink>
@@ -49,7 +49,7 @@ const Navbar = ({ toggle, setToggle }) => {
               to="/authors"
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
-							transition duration-300 ease-in-out flex items-center"
+              transition duration-300 ease-in-out flex items-center"
             >
               Authors
             </NavLink>
@@ -57,7 +57,7 @@ const Navbar = ({ toggle, setToggle }) => {
               to="/sellBook"
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
-							transition duration-300 ease-in-out flex items-center"
+              transition duration-300 ease-in-out flex items-center"
             >
               Sell Book
             </NavLink>
@@ -65,14 +65,14 @@ const Navbar = ({ toggle, setToggle }) => {
               to="/about"
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
-							transition duration-300 ease-in-out flex items-center"
+              transition duration-300 ease-in-out flex items-center"
             >
               About Us
             </NavLink>
             {isAuthor && (
               <NavLink
                 className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
-							transition duration-300 ease-in-out flex items-center"
+                transition duration-300 ease-in-out flex items-center"
                 to="dashboard"
               >
                 <LuLock className="inline-block mr-1" size={18} />
@@ -82,7 +82,7 @@ const Navbar = ({ toggle, setToggle }) => {
             <NavLink
               to={"/cart"}
               className="relative text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
-							transition duration-300 ease-in-out flex items-center"
+              transition duration-300 ease-in-out flex items-center"
             >
               <BsCart2
                 className="inline-block mr-1 group-hover:text-blue-500"
@@ -92,7 +92,7 @@ const Navbar = ({ toggle, setToggle }) => {
               {cart.length > 0 && (
                 <span
                   className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full px-2 py-0.5 
-									text-xs group-hover:bg-red-500 hover:text-white transition duration-300 ease-in-out"
+                  text-xs group-hover:bg-red-500 hover:text-white transition duration-300 ease-in-out"
                 >
                   {cart.length}
                 </span>
@@ -104,7 +104,7 @@ const Navbar = ({ toggle, setToggle }) => {
           {user ? (
             <button
               className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
-						rounded-md flex items-center transition duration-300 ease-in-out"
+              rounded-md flex items-center transition duration-300 ease-in-out"
               onClick={logout}
             >
               <LuLogOut size={18} />
@@ -115,7 +115,7 @@ const Navbar = ({ toggle, setToggle }) => {
               <Link
                 to={"/register"}
                 className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 
-									rounded-md flex items-center transition duration-300 ease-in-out"
+                rounded-md flex items-center transition duration-300 ease-in-out"
               >
                 <LuUserPlus className="mr-2" size={18} />
                 Sign Up
@@ -123,7 +123,7 @@ const Navbar = ({ toggle, setToggle }) => {
               <Link
                 to={"/login"}
                 className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
-									rounded-md flex items-center transition duration-300 ease-in-out"
+                rounded-md flex items-center transition duration-300 ease-in-out"
               >
                 <LuLogIn className="mr-2" size={18} />
                 Login
@@ -140,6 +140,7 @@ const Navbar = ({ toggle, setToggle }) => {
         </div>
       </div>
 
+      {/* القائمة المنسدلة للشاشات الصغيرة */}
       <div className={`md:hidden ${toggle ? "block" : "hidden"} bg-white`}>
         <ul className="flex flex-col items-center space-y-4 py-4">
           <li>
@@ -203,6 +204,29 @@ const Navbar = ({ toggle, setToggle }) => {
               className="text-gray-600 hover:text-blue-500 transition flex items-center"
             >
               <BsFillPersonFill className="mr-2" /> Login
+            </NavLink>
+          </li>
+          {/* إضافة عنصر Cart في النهاية للشاشات الصغيرة */}
+          <li>
+            <NavLink
+              to="/cart"
+              onClick={() => setToggle(false)}
+              className="relative text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
+              transition duration-300 ease-in-out flex items-center"
+            >
+              <BsCart2
+                className="inline-block mr-1 group-hover:text-blue-500"
+                size={20}
+              />
+              <span className="hidden sm:inline">Cart</span>
+              {cart.length > 0 && (
+                <span
+                  className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full px-2 py-0.5 
+                  text-xs group-hover:bg-red-500 hover:text-white transition duration-300 ease-in-out"
+                >
+                  {cart.length}
+                </span>
+              )}
             </NavLink>
           </li>
         </ul>
