@@ -1,46 +1,54 @@
+import { Link } from "react-router-dom";
+import { useCartStore } from "../../store/cartStore";
+import CartItem from "../../pages/cart/CartItem";
+import { LuShoppingCart } from "react-icons/lu";
 import OrderSummary from "./OrderSummary";
-import CartItem from "./CartItem";
-import { useContext } from "react";
-import CartContext from "../../context/cartContext";
 
-const Cart = () => {
-  const { cartItems, addToCart, removeFromCart } = useContext(CartContext);
-
-  const totalPrice = cartItems
-    .reduce((acc, cur) => acc + cur.price * cur.quantity, 0)
-    .toFixed(2);
+const CartPage = () => {
+  const { cart } = useCartStore();
 
   return (
-    <div className="p-10 flex flex-col items-center bg-gray-100">
-      <h1 className="font-bold text-3xl mb-8 text-gray-800">Shopping Cart</h1>
-      <div className="flex flex-wrap justify-between gap-5 w-full max-w-5xl">
-        <div className="flex-grow max-w-md w-full">
-          <div className="grid grid-cols-4 p-2 font-bold text-blue-600 text-lg mb-5 text-center gap-x-7">
-            <span>Product</span>
-            <span>Price</span>
-            <span>Quantity</span>
-            <span>Subtotal</span>
-          </div>
-          
-          <div className="w-full">
-            {cartItems.length ? (
-              cartItems.map((item) => (
-                <CartItem
-                  key={item.id}
-                  removeFromCart={removeFromCart}
-                  addToCart={addToCart}
-                  item={item}
-                />
-              ))
+    <div className="py-8 md:py-16">
+      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+          <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+            {cart.length === 0 ? (
+              <EmptyCartUI />
             ) : (
-              <div className="text-lg text-gray-500 text-center">Your cart is empty.</div>
+              <div className="space-y-6">
+                {cart.map((book) => (
+                  <CartItem key={book._id} book={book} />
+                ))}
+              </div>
             )}
           </div>
+
+          {cart.length > 0 && (
+            <div className="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
+              <OrderSummary />
+            </div>
+          )}
         </div>
-        <OrderSummary totalPrice={totalPrice} />
       </div>
     </div>
   );
 };
+export default CartPage;
 
-export default Cart;
+const EmptyCartUI = () => (
+  <div className="flex flex-col items-center justify-center space-y-4 py-16">
+    <LuShoppingCart className="h-24 w-24 text-gray-600" />
+    <h3 className="text-2xl font-semibold ">Your cart is empty</h3>
+    <p className="text-gray-600">
+      Looks like you {"haven't"} added anything to your cart yet.
+    </p>
+    <Link
+      className="mt-4 rounded-md bg-blue-500 px-6 py-2 text-white transition-colors hover:bg-blue-600"
+      to="/"
+    >
+      Start Shopping
+    </Link>
+  </div>
+);
+
+// 4000056655665556;

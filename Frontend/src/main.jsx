@@ -6,5 +6,5 @@ import CartProvider from './context/CartProvider';
 createRoot(document.getElementById("root")).render(
   <CartProvider>
   <App />
-</CartProvider>,
+</CartProvider>
 );

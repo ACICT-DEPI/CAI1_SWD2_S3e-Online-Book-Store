@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useCartStore } from './../../store/cartStore';
 import {
   BsBook,
   BsCart2,
@@ -7,10 +7,9 @@ import {
   BsXLg,
   BsList,
 } from "react-icons/bs";
-import CartContext from "../../context/cartContext"; 
 
 const Navbar = ({ toggle, setToggle }) => {
-  const { cartItemsLength } = useContext(CartContext); 
+  const{cart}=useCartStore();
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-lg z-50 p-3">
@@ -95,9 +94,9 @@ const Navbar = ({ toggle, setToggle }) => {
             to="/cart"
             className="relative flex items-center text-gray-600 hover:text-blue-500 transition"
           >
-            {cartItemsLength > 0 && (
+            {cart.length > 0 && (
               <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                {cartItemsLength}
+                {cart.length}
               </span>
             )}
             <BsCart2 size={30} />

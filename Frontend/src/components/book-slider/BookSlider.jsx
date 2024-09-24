@@ -1,18 +1,15 @@
-import { useContext, useState } from "react";
-import { FaEye, FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
-import { BsCartPlus } from "react-icons/bs";
+import { FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
+
 import Modal from "../modal/modal";
 import "./book-slider.css";
-import Rating from "./Rating";
-import CartContext from "../../context/cartContext";
+import { useState } from "react";
+import BookCard from "../BookCard";
 
 const BookSlider = ({ data }) => {
-  const { addToCart } = useContext(CartContext); 
   const [slideIndex, setSlideIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [bookData, setBookData] = useState(null);
 
-  // Handle Click
   const handleClick = (direction) => {
     if (direction === "left" && slideIndex > 0) {
       setSlideIndex(slideIndex - 1);
@@ -21,7 +18,6 @@ const BookSlider = ({ data }) => {
     }
   };
 
-  // Handle Modal
   const handleOpenModal = (item) => {
     setOpenModal(true);
     setBookData(item);
@@ -38,37 +34,18 @@ const BookSlider = ({ data }) => {
         />
       )}
       <div
-        style={{ transform: `translateX(${slideIndex * -340}px)` }}
+        style={{ transform: `translateX(${slideIndex * -360}px)` }}
         className="book-slider-wrapper"
       >
         {data.map((item) => (
-          <div key={item.id} className="book-slide-item">
-            <img
-              src={`/books/${item.image}`}
-              alt={item.title}
-              className="book-slide-item-img"
-            />
-            <h3 className="book-slide-item-title">{item.title}</h3>
-            <Rating rating={item.rating} reviews={item.reviews} />
-            <div className="book-slider-item-price">${item.price}</div>
-            <div className="book-slider-icons-wrapper flex text-center justify-center gap-4 cursor-pointer">
-              <FaEye
-                size={20}
-                color="black"
-                onClick={() => handleOpenModal(item)}
-                className="book-slider-icon"
-              />
-              <BsCartPlus
-                size={20}
-                color="black"
-                onClick={() => addToCart({ ...item, quantity: 1 })} // Add item to cart
-                className="book-slider-icon flex"
-              />
-            </div>
-          </div>
+          <BookCard
+            key={item._id}
+            book={item}
+            handleOpenModal={handleOpenModal}
+          />
         ))}
       </div>
-      {slideIndex < data.length - 1 && (
+      {slideIndex < data.length - 4 && (
         <FaCircleArrowRight
           size={30}
           color="black"
