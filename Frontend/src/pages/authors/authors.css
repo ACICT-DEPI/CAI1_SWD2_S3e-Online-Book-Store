@@ -1,0 +1,136 @@
+
+    .authors {
+        padding: 20px;
+        background-color: #f9f9f9; 
+    }
+    
+    .author-search-wrapper {
+        margin-bottom: 20px;
+    }
+    
+    .author-search-wrapper input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    
+    /* Author List Styles */
+    .authors-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+        gap: 20px; 
+    }
+    
+    .author {
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 15px;
+        cursor: pointer;
+    
+    }
+    
+    .author:hover {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+    
+    .author-img {
+        width: 100%;
+        height: 150px;
+        border-radius: 8px;
+    }
+    
+    .author-name {
+        font-size: 1.2em;
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    /* Popup styling */
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100; /* to appear on top of other elements */
+    }
+    
+    .popup-content {
+        background: white;
+        padding: 50px;
+        border-radius: 10px;
+        max-width: 800px;
+        width: 90%;
+        position: relative;
+    }
+    
+    .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+    }
+    
+    /* Book list styling */
+    .book-list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+        gap: 35px;
+    }
+    
+    .book-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .book-img {
+        width: 80px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+    
+
+    h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color:#1976d2;
+    }
+    
+    h3 {
+        font-size: 1.2em;
+        margin: 0;
+        color:#1976d2;
+    }
+    
+    p {
+        margin-top: 60px ;
+        margin:0;
+
+        font-weight: 600;
+    }
+
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .authors-wrapper {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Adjust for smaller screens */
+        }
+    
+        .book-img {
+        width: 60px;
+        height: 90px; 
+        }
+    }
+    
