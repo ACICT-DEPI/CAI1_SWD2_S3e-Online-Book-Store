@@ -5,7 +5,7 @@ const Input = forwardRef(({ icon: Icon, ...rest }, ref) => {
   return (
     <div className="relative">
       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        {Icon ? <Icon /> : null}
+        {Icon ? <Icon className="size-5 text-blue-500" /> : null}
       </div>
       <input
         ref={ref}

@@ -9,8 +9,7 @@ import { authorRoute, protectRoute } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.get("/", protectRoute, authorRoute, getAllBooks);
-// router.get("/category/:category", getProductsByCategory);
+router.get("/", protectRoute, getAllBooks);
 router.post("/", protectRoute, authorRoute, createBook);
 router.put("/:id", protectRoute, authorRoute, updateBook);
 router.delete("/:id", protectRoute, authorRoute, deleteBook);

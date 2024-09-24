@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import {  useContext,useState } from "react";
 import { authors } from "../../data/authors";
-import { books } from "../../data/books"; // Importing books
+import { books } from "../../data/books"; 
 import "./authors.css";
+import { BsCartPlus } from "react-icons/bs";
 
 import CartContext from "../../context/cartContext";
 
@@ -9,20 +11,19 @@ const Authors = () => {
   const [search, setSearch] = useState("");
   const {addToCart} = useContext(CartContext);
 
-  const [selectedAuthor, setSelectedAuthor] = useState(null); // To hold selected author data
-  const [showPopup, setShowPopup] = useState(false); // To control pop-up visibility
+  const [selectedAuthor, setSelectedAuthor] = useState(null);
+  const [showPopup, setShowPopup] = useState(false); 
 
   const handleAuthorClick = (authorName) => {
-    setSelectedAuthor(authorName); // Set the selected author
-    setShowPopup(true); // Show the pop-up
+    setSelectedAuthor(authorName); 
+    setShowPopup(true); 
   };
 
   const handleClosePopup = () => {
-    setShowPopup(false); // Close the pop-up
-    setSelectedAuthor(null); // Clear the selected author
+    setShowPopup(false); 
+    setSelectedAuthor(null); 
   };
 
-  // Filter books based on the selected author
   const authorBooks = books.filter((book) => book.author === selectedAuthor);
 
   return (
@@ -45,13 +46,16 @@ const Authors = () => {
               key={author.id}
               onClick={() => handleAuthorClick(author.name)}
             >
-              <img src={author.image} alt={author.name} className="author-img" />
+              <img
+                src={author.image}
+                alt={author.name}
+                className="author-img"
+              />
               <h2 className="author-name">{author.name}</h2>
             </div>
           ))}
       </div>
 
-      {/* Pop-up for author books */}
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
@@ -60,20 +64,23 @@ const Authors = () => {
             </span>
             <h2>{selectedAuthor}'s Books</h2>
             <div className="book-list">
-                {authorBooks.length > 0 ? (
-                    authorBooks.map((book) => (
-                      <div key={book.id} className="book-item">
-                        <img src={book.image} alt={book.title} className="book-img" />
-                        <h3>{book.title}</h3>
-                        <i onClick={()=>addToCart({...book,quantity:1})} className="bi bi-cart-plus"></i>
-                        
-
-                      </div>
-                    ))
-                  ) : (
-                    <p>No books found for this author</p>
-    )}
-
+              {authorBooks.length > 0 ? (
+                authorBooks.map((book) => (
+                  <div key={book.id} className="book-item">
+                    <img
+                      src={book.image}
+                      alt={book.title}
+                      className="book-img"
+                    />
+                    <h3>{book.title}</h3>
+                    <BsCartPlus
+                      onClick={() => addToCart({ ...book, quantity: 1 })}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p>No books found for this author</p>
+              )}
             </div>
           </div>
         </div>
