@@ -61,9 +61,7 @@ const router = createBrowserRouter(
         <Route
           index
           element={
-            <ProtectedRoute>
               <HomePage />
-            </ProtectedRoute>
           }
         />
         <Route

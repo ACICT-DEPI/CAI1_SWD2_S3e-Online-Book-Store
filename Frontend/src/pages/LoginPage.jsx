@@ -25,7 +25,6 @@ const LoginPage = () => {
   const { login, isLoading } = useAuthStore();
 
   const handleLogin = async (data) => {
-    console.log(data);
     try {
       await login(data);
       toast.success(

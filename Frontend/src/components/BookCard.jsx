@@ -1,9 +1,13 @@
 import Rating from "./book-slider/Rating";
 import { useCartStore } from "../store/cartStore";
 import { BsCartPlus } from "react-icons/bs";
+import { useAuthStore } from "./../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 const BookCard = ({ book, handleOpenModal }) => {
+  const { user } = useAuthStore();
   const { addToCart } = useCartStore();
+  const navigate = useNavigate();
   return (
     <div>
       <div className="flex flex-col items-center justify-center ">
@@ -63,14 +67,18 @@ const BookCard = ({ book, handleOpenModal }) => {
                 </div>
                 <div className="flex space-x-2 text-sm font-medium justify-between">
                   <button
-                    onClick={() => addToCart(book)}
+                    onClick={() =>
+                      user ? addToCart(book) : navigate("/login")
+                    }
                     className="transition ease-in duration-300 inline-flex items-center text-sm font-medium mb-2 md:mb-0 bg-blue-500 px-5 py-2 hover:shadow-lg tracking-wider text-white rounded-full hover:bg-blue-600 "
                   >
                     <BsCartPlus size={20} className="mx-1" />
                     <span>Add Cart</span>
                   </button>
                   <button
-                    onClick={() => handleOpenModal(book)}
+                    onClick={() =>
+                      user ? handleOpenModal(book) : navigate("/login")
+                    }
                     className="transition ease-in duration-300 bg-gray-700 hover:bg-gray-800 border hover:border-gray-500 border-gray-700 hover:text-white  hover:shadow-lg text-gray-400 rounded-full w-9 h-9 text-center p-2"
                   >
                     <svg
