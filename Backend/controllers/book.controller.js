@@ -6,10 +6,21 @@ export const getAllBooks = async (req, res) => {
     const books = await Book.find({});
     res.status(200).json({ books });
   } catch (error) {
-    console.log("Error in getAllProducts controller", error.message);
+    console.log("Error in getAllBooks controller", error.message);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const getAuthorBooks=async(req,res)=>{
+  try {
+    const author = req.user;
+    const authorBooks = await Book.find({authorId: author._id});
+    res.status(200).json({ authorBooks });
+  } catch (error) {
+    console.log("Error in getAuthorsBooks controller", error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+}
 
 export const createBook = async (req, res) => {
   try {

@@ -2,13 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useCartStore } from "./../../store/cartStore";
 import { useAuthStore } from "./../../store/authStore";
 import { LuLock, LuLogIn, LuLogOut, LuUserPlus } from "react-icons/lu";
-import {
-  BsBook,
-  BsCart2,
-  BsFillPersonFill,
-  BsXLg,
-  BsList,
-} from "react-icons/bs";
+import { BsBook, BsCart2, BsXLg, BsList } from "react-icons/bs";
 
 const Navbar = ({ toggle, setToggle }) => {
   const { user, logout } = useAuthStore();
@@ -26,12 +20,10 @@ const Navbar = ({ toggle, setToggle }) => {
           <BsBook className="text-2xl mx-1 text-yellow-500" />
           <span className="text-blue-700">Store</span>
         </Link>
-
         {user && (
           <div className="hidden sm:space-x-5 md:flex space-x-20 items-center">
             <NavLink
               to="/"
-              onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
               transition duration-300 ease-in-out flex items-center"
             >
@@ -39,7 +31,6 @@ const Navbar = ({ toggle, setToggle }) => {
             </NavLink>
             <NavLink
               to="/Books"
-              onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
               transition duration-300 ease-in-out flex items-center"
             >
@@ -47,23 +38,13 @@ const Navbar = ({ toggle, setToggle }) => {
             </NavLink>
             <NavLink
               to="/authors"
-              onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
               transition duration-300 ease-in-out flex items-center"
             >
               Authors
             </NavLink>
             <NavLink
-              to="/sellBook"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
-              transition duration-300 ease-in-out flex items-center"
-            >
-              Sell Book
-            </NavLink>
-            <NavLink
               to="/about"
-              onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
               transition duration-300 ease-in-out flex items-center"
             >
@@ -118,7 +99,7 @@ const Navbar = ({ toggle, setToggle }) => {
                 rounded-md flex items-center transition duration-300 ease-in-out"
               >
                 <LuUserPlus className="mr-2" size={18} />
-                Sign Up
+                <span className="hidden sm:inline ml-2">Sign Up</span>
               </Link>
               <Link
                 to={"/login"}
@@ -126,88 +107,55 @@ const Navbar = ({ toggle, setToggle }) => {
                 rounded-md flex items-center transition duration-300 ease-in-out"
               >
                 <LuLogIn className="mr-2" size={18} />
-                Login
+                <span className="hidden sm:inline ml-2">Login</span>
               </Link>
             </>
           )}
-
-          <button
-            onClick={() => setToggle(!toggle)}
-            className="ml-4 md:hidden text-gray-800 text-3xl focus:outline-none"
-          >
-            {toggle ? <BsXLg /> : <BsList />}
-          </button>
+          {user && (
+            <button
+              onClick={() => setToggle(!toggle)}
+              className="ml-4 md:hidden text-gray-800 text-3xl focus:outline-none"
+            >
+              {toggle ? <BsXLg /> : <BsList />}
+            </button>
+          )}
         </div>
       </div>
-
-      {/* القائمة المنسدلة للشاشات الصغيرة */}
-      <div className={`md:hidden ${toggle ? "block" : "hidden"} bg-white`}>
-        <ul className="flex flex-col items-center space-y-4 py-4">
-          <li>
+      {user && (
+        <div className={`md:hidden ${toggle ? "block" : "hidden"} bg-white`}>
+          <div className="flex flex-col items-center space-y-4 py-4">
             <NavLink
               to="/"
               onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
+              className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
+              transition duration-300 ease-in-out flex items-center"
             >
               Home
             </NavLink>
-          </li>
-          <li>
             <NavLink
               to="/Books"
               onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
+              className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
+              transition duration-300 ease-in-out flex items-center"
             >
               Books
             </NavLink>
-          </li>
-          <li>
             <NavLink
               to="/authors"
               onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
+              className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
+              transition duration-300 ease-in-out flex items-center"
             >
               Authors
             </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/sellBook"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
-            >
-              Sell Book
-            </NavLink>
-          </li>
-          <li>
             <NavLink
               to="/about"
               onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
+              className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium
+              transition duration-300 ease-in-out flex items-center"
             >
               About Us
             </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/register"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition"
-            >
-              Register
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/login"
-              onClick={() => setToggle(false)}
-              className="text-gray-600 hover:text-blue-500 transition flex items-center"
-            >
-              <BsFillPersonFill className="mr-2" /> Login
-            </NavLink>
-          </li>
-          {/* إضافة عنصر Cart في النهاية للشاشات الصغيرة */}
-          <li>
             <NavLink
               to="/cart"
               onClick={() => setToggle(false)}
@@ -228,9 +176,9 @@ const Navbar = ({ toggle, setToggle }) => {
                 </span>
               )}
             </NavLink>
-          </li>
-        </ul>
-      </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

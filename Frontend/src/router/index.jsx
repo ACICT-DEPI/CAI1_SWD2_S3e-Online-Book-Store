@@ -20,6 +20,7 @@ import EmailVerificationPage from "./../pages/EmailVerificationPage";
 import BooksPage from "./../pages/Books/Books";
 import ProtectedRoute from "./../components/auth/ProtectedRoute";
 import RedirectAuthenticatedUser from "./../components/auth/RedirectAuthenticatedUser";
+import AuthorPage from "./../pages/AuthorPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,12 +59,7 @@ const router = createBrowserRouter(
             </RedirectAuthenticatedUser>
           }
         />
-        <Route
-          index
-          element={
-              <HomePage />
-          }
-        />
+        <Route index element={<HomePage />} />
         <Route
           path="/book/:id"
           element={
@@ -101,6 +97,14 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute>
               <Authors />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <AuthorPage />
             </ProtectedRoute>
           }
         />
