@@ -13,6 +13,7 @@ import NotFoundPage from "./../pages/NotFoundPage";
 import RegisterPage from "../pages/Registerpage";
 import LoginPage from "../pages/LoginPage";
 import CartPage from "../pages/cart/Cart";
+import ReviewsPage from './../pages/reviews/ReviewsPage';
 import Authors from "./../pages/authors/Authors";
 import ForgotPasswordPage from "./../pages/ForgotPasswordPage";
 import ResetPasswordPage from "./../pages/ResetPasswordPage";
@@ -100,6 +101,12 @@ const router = createBrowserRouter(
             </ProtectedRoute>
           }
         />
+        <Route path="/reviews" 
+          element={
+              <ProtectedRoute>
+                <ReviewsPage/>
+              </ProtectedRoute>
+            } />
         <Route
           path="/dashboard"
           element={
