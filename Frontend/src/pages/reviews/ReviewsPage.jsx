@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useReviewStore } from "../../store/reviewStore";
-import { books } from "../../data/books"; // Adjust the path as necessary
+import { books } from "../../data/books"; 
 
 const ReviewsPage = () => {
 
@@ -20,7 +20,7 @@ const ReviewsPage = () => {
         setSelectedBook(null);
     };
 
-    // Getting reviews based on selectedBook
+    // Getting reviews based on title of the selectedBook
     const reviews = selectedBook ? reviewsStore[selectedBook.title] || [] : [];
 
 
@@ -56,7 +56,7 @@ const ReviewsPage = () => {
                                 </div>
                             ))
                         ) : (
-                            <p className="text-gray-600">No reviews yet for this book.</p>
+                            <p className="text-gray-600">No reviews yet for this book</p>
                         )}
                         <div className="flex justify-end mt-6">
                             <button
