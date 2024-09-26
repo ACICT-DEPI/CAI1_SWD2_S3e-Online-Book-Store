@@ -9,6 +9,7 @@ import {
 } from "react-icons/bs";
 import { useCartStore } from "../../store/cartStore";
 import { useReviewStore } from "../../store/reviewStore";
+import toast from "react-hot-toast";
 
 const BookPage = () => {
   const { books } = useBookStore();
@@ -23,11 +24,9 @@ const BookPage = () => {
   const handleReviewSubmit = (e) => {
     e.preventDefault();
     addReview(book.title, reviewText); // Using book.title as key for reviews
-    setReviewText(""); 
-    setShowModal(false); 
-};
-
-  
+    setReviewText("");
+    setShowModal(false);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -42,12 +41,21 @@ const BookPage = () => {
             <div>
               <h1 className="text-4xl font-bold mb-2">{book.title}</h1>
               <div className="text-gray-600 mb-4">
-                by <span className="font-semibold">{book.author}</span>
+                by <span className="font-semibold">{book.authorName}</span>
               </div>
 
               <div className="flex items-center space-x-4 mt-4">
                 <button
-                  onClick={() => addToCart(book)}
+                  onClick={() =>
+                    book.inStock
+                      ? addToCart(book)
+                      : toast.error("Book is out of stock", {
+                          style: {
+                            backgroundColor: "black",
+                            color: "white",
+                          },
+                        })
+                  }
                   className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 flex items-center"
                 >
                   <BsCartPlus />
@@ -92,7 +100,7 @@ const BookPage = () => {
           </div>
         </div>
       </div>
-    
+
       {showModal && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg shadow-lg">

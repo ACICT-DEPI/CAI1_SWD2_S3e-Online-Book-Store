@@ -3,6 +3,7 @@ import Rating from "../../components/book-slider/Rating";
 import { Link } from "react-router-dom";
 import { BsXCircleFill, BsCartPlus } from "react-icons/bs";
 import { useCartStore } from "../../store/cartStore";
+import toast from "react-hot-toast";
 
 const Modal = ({ bookData, setOpenModal }) => {
   const { addToCart } = useCartStore();
@@ -47,7 +48,16 @@ const Modal = ({ bookData, setOpenModal }) => {
             </p>
             <div className="flex items-center mb-4">
               <button
-                onClick={() => addToCart(bookData)}
+                onClick={() =>
+                  inStock
+                    ? addToCart(bookData)
+                    : toast.error("Book is out of stock", {
+                        style: {
+                          backgroundColor: "black",
+                          color: "white",
+                        },
+                      })
+                }
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center"
               >
                 <BsCartPlus size={20} /> Add To Cart

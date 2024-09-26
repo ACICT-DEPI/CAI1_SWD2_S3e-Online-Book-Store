@@ -26,11 +26,13 @@ const bookSchema = new mongoose.Schema(
     rating: {
       type: Number,
       min: 0,
+      default: 0,
       required: false,
     },
     reviews: {
       type: Number,
       min: 0,
+      default: 0,
       required: false,
     },
     printLength: {

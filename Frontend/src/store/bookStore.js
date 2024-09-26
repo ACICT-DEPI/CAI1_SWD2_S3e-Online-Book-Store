@@ -2,8 +2,9 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import axios from "../config/axios";
 
-export const useBookStore = create((set) => ({
+export const useBookStore = create((set, get) => ({
   books: [],
+  authorBooks: [],
   loading: false,
 
   getAllBooks: async () => {
@@ -11,6 +12,17 @@ export const useBookStore = create((set) => ({
     try {
       const response = await axios.get("/books");
       set({ books: response.data.books, loading: false });
+    } catch (error) {
+      set({ error: "Failed to fetch books", loading: false });
+      toast.error(error.response.data.error || "Failed to fetch books");
+    }
+  },
+
+  getAuthorBooks: async () => {
+    set({ loading: true });
+    try {
+      const response = await axios.get("/books/author-books");
+      set({ authorBooks: response.data.authorBooks, loading: false });
     } catch (error) {
       set({ error: "Failed to fetch books", loading: false });
       toast.error(error.response.data.error || "Failed to fetch books");
@@ -25,6 +37,18 @@ export const useBookStore = create((set) => ({
         books: [...prevState.books, res.data.book],
         loading: false,
       }));
+    } catch (error) {
+      toast.error(error.message);
+      set({ loading: false });
+    }
+  },
+
+  editBook: async (bookId, bookData) => {
+    set({ loading: true });
+    try {
+      await axios.put(`/books/${bookId}`, bookData);
+      set({ loading: false });
+      get().getAuthorBooks();
     } catch (error) {
       toast.error(error.message);
       set({ loading: false });

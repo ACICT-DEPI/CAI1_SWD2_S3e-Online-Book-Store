@@ -11,16 +11,16 @@ export const getAllBooks = async (req, res) => {
   }
 };
 
-export const getAuthorBooks=async(req,res)=>{
+export const getAuthorBooks = async (req, res) => {
   try {
     const author = req.user;
-    const authorBooks = await Book.find({authorId: author._id});
+    const authorBooks = await Book.find({ authorId: author._id });
     res.status(200).json({ authorBooks });
   } catch (error) {
     console.log("Error in getAuthorsBooks controller", error.message);
     res.status(500).json({ message: "Server error", error: error.message });
   }
-}
+};
 
 export const createBook = async (req, res) => {
   try {
@@ -33,7 +33,8 @@ export const createBook = async (req, res) => {
       language,
       PublicationDate,
       image,
-      author,
+      authorId,
+      authorName,
     } = req.body;
 
     let cloudinaryResponse = null;
@@ -55,7 +56,8 @@ export const createBook = async (req, res) => {
       image: cloudinaryResponse?.secure_url
         ? cloudinaryResponse.secure_url
         : "",
-      author,
+      authorId,
+      authorName,
     });
     await book.save();
     res.status(201).json({ book });
@@ -82,12 +84,14 @@ export const updateBook = async (req, res) => {
     image,
   } = req.body;
 
+  let cloudinaryResponse = null;
   if (image) {
     cloudinaryResponse = await cloudinary.uploader.upload(image, {
       folder: "books",
+      public_id: book.image.split("/").pop().split(".")[0],
+      overwrite: true,
     });
   }
-
   book.title = title;
   book.description = description;
   book.category = category;
@@ -95,9 +99,11 @@ export const updateBook = async (req, res) => {
   book.printLength = printLength;
   book.language = language;
   book.PublicationDate = PublicationDate;
-  book.inStock = inStock;
+  book.inStock = true;
+  book.image = cloudinaryResponse?.secure_url
+    ? cloudinaryResponse.secure_url
+    : book.image;
   await book.save();
-
   res.status(201).json({ book });
 };
 

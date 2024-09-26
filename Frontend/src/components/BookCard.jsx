@@ -3,6 +3,7 @@ import { useCartStore } from "../store/cartStore";
 import { BsCartPlus } from "react-icons/bs";
 import { useAuthStore } from "./../store/authStore";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const BookCard = ({ book, handleOpenModal }) => {
   const { user } = useAuthStore();
@@ -46,9 +47,6 @@ const BookCard = ({ book, handleOpenModal }) => {
                       <h2 className="text-lg mr-auto cursor-pointer text-gray-800 hover:text-blue-500 truncate font-bold">
                         {book.title}
                       </h2>
-                      <div className="flex items-center bg-green-400 text-white text-xs px-2 py-1 ml-3 rounded-lg">
-                        INSTOCK
-                      </div>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
@@ -56,20 +54,44 @@ const BookCard = ({ book, handleOpenModal }) => {
                       ${book.price}
                     </div>
                     <div className="text-sm text-gray-600 font-bold">
-                      <span>{book.reviews} reviews</span>
+                      {book.inStock ? (
+                        <div className="flex items-center bg-green-500 text-white text-xs px-2 py-1 ml-3 rounded-lg">
+                          INSTOCK
+                        </div>
+                      ) : (
+                        <div className="flex items-center bg-red-500 text-white text-xs px-2 py-1 ml-3 rounded-lg">
+                          OUT OF STOCK
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="lg:flex py-2 text-sm text-gray-600">
                     <div className="flex-1 inline-flex items-center  mb-2">
                       <Rating rating={book.rating} />
                     </div>
+                    <div className="text-sm text-gray-600 font-bold">
+                      <span>{book.reviews} reviews</span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex space-x-2 text-sm font-medium justify-between">
                   <button
-                    onClick={() =>
-                      user ? addToCart(book) : navigate("/login")
-                    }
+                    onClick={() => {
+                      if (user) {
+                        if (book.inStock) {
+                          addToCart(book);
+                        } else {
+                          toast.error("Book is out of stock", {
+                            style: {
+                              backgroundColor: "black",
+                              color: "white",
+                            },
+                          });
+                        }
+                      } else {
+                        navigate("/login");
+                      }
+                    }}
                     className="transition ease-in duration-300 inline-flex items-center text-sm font-medium mb-2 md:mb-0 bg-blue-500 px-5 py-2 hover:shadow-lg tracking-wider text-white rounded-full hover:bg-blue-600 "
                   >
                     <BsCartPlus size={20} className="mx-1" />

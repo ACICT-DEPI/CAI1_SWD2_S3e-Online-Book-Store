@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCartStore } from "./../../store/cartStore";
 import { useAuthStore } from "./../../store/authStore";
 import { LuLock, LuLogIn, LuLogOut, LuUserPlus } from "react-icons/lu";
@@ -8,6 +8,12 @@ const Navbar = ({ toggle, setToggle }) => {
   const { user, logout } = useAuthStore();
   const isAuthor = user?.role === "author";
   const { cart } = useCartStore();
+  const navigate = useNavigate();
+
+  const handleLogOut = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white shadow-lg z-50 p-3">
@@ -65,12 +71,13 @@ const Navbar = ({ toggle, setToggle }) => {
               to={"/cart"}
               className="relative text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium transition duration-300 ease-in-out flex items-center"
             >
-              <BsCart2 className="inline-block mr-1 group-hover:text-blue-500" size={20} />
+              <BsCart2
+                className="inline-block mr-1 group-hover:text-blue-500"
+                size={20}
+              />
               <span className="hidden sm:inline">Cart</span>
               {cart.length > 0 && (
-                <span
-                  className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs group-hover:bg-red-500 hover:text-white transition duration-300 ease-in-out"
-                >
+                <span className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs group-hover:bg-red-500 hover:text-white transition duration-300 ease-in-out">
                   {cart.length}
                 </span>
               )}
@@ -81,7 +88,7 @@ const Navbar = ({ toggle, setToggle }) => {
           {user ? (
             <button
               className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md flex items-center transition duration-300 ease-in-out"
-              onClick={logout}
+              onClick={handleLogOut}
             >
               <LuLogOut size={18} />
               <span className="hidden sm:inline ml-2">Log Out</span>
@@ -157,12 +164,13 @@ const Navbar = ({ toggle, setToggle }) => {
               onClick={() => setToggle(false)}
               className="relative text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium transition duration-300 ease-in-out flex items-center"
             >
-              <BsCart2 className="inline-block mr-1 group-hover:text-blue-500" size={20} />
+              <BsCart2
+                className="inline-block mr-1 group-hover:text-blue-500"
+                size={20}
+              />
               <span className="hidden sm:inline">Cart</span>
               {cart.length > 0 && (
-                <span
-                  className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs group-hover:bg-red-500 hover:text-white transition duration-300 ease-in-out"
-                >
+                <span className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs group-hover:bg-red-500 hover:text-white transition duration-300 ease-in-out">
                   {cart.length}
                 </span>
               )}

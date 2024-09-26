@@ -37,7 +37,8 @@ const CreateBookForm = () => {
         category: "",
         language: "",
         PublicationDate: "",
-        author: user._id,
+        authorId: user._id,
+        authorName: user.name,
         image: "",
       });
     } catch {
@@ -60,7 +61,7 @@ const CreateBookForm = () => {
 
   return (
     <div
-      className="mt-[100px] mx-auto max-w-lg w-full bg-gray-300 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl 
+      className="mx-auto max-w-lg w-full bg-gray-300 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl 
 			overflow-hidden m-5"
     >
       <div className="p-8">
@@ -68,7 +69,7 @@ const CreateBookForm = () => {
           Add New Book
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-2">
           <div>
             <Input
               type="text"

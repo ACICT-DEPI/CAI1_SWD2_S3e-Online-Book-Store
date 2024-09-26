@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import CreateBookForm from "../components/CreateBookForm";
 import BooksList from "../components/BooksList";
-import { useBookStore } from "../store/bookStore";
 import { LuBarChart, LuPlusCircle } from "react-icons/lu";
 import { BsBookshelf } from "react-icons/bs";
 
@@ -13,11 +12,6 @@ const tabs = [
 
 const AuthorPage = () => {
   const [activeTab, setActiveTab] = useState("add");
-  const { getAllBooks } = useBookStore();
-
-  useEffect(() => {
-    getAllBooks();
-  }, [getAllBooks]);
 
   return (
     <div className="min-h-screen relative overflow-hidden">

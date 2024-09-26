@@ -22,6 +22,8 @@ import BooksPage from "./../pages/Books/Books";
 import ProtectedRoute from "./../components/auth/ProtectedRoute";
 import RedirectAuthenticatedUser from "./../components/auth/RedirectAuthenticatedUser";
 import AuthorPage from "./../pages/AuthorPage";
+import PaymentSuccessPage from './../pages/PaymentSuccessPage';
+import PaymentCancelPage from "../pages/PaymentCancelPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -94,6 +96,22 @@ const router = createBrowserRouter(
           }
         />
         <Route
+          path="/payment-success"
+          element={
+            <ProtectedRoute>
+              <PaymentSuccessPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payment-cancel"
+          element={
+            <ProtectedRoute>
+              <PaymentCancelPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/authors"
           element={
             <ProtectedRoute>
@@ -101,12 +119,14 @@ const router = createBrowserRouter(
             </ProtectedRoute>
           }
         />
-        <Route path="/reviews" 
+        <Route
+          path="/reviews"
           element={
-              <ProtectedRoute>
-                <ReviewsPage/>
-              </ProtectedRoute>
-            } />
+            <ProtectedRoute>
+              <ReviewsPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={
