@@ -24,6 +24,8 @@ import RedirectAuthenticatedUser from "./../components/auth/RedirectAuthenticate
 import AuthorPage from "./../pages/AuthorPage";
 import PaymentSuccessPage from './../pages/PaymentSuccessPage';
 import PaymentCancelPage from "../pages/PaymentCancelPage";
+import ProfilePage from "../pages/ProfilePage";
+import SettingPage from "../pages/SettingPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -132,6 +134,22 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute>
               <AuthorPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/setting"
+          element={
+            <ProtectedRoute>
+              <SettingPage />
             </ProtectedRoute>
           }
         />

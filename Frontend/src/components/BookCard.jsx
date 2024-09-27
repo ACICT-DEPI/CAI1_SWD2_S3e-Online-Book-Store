@@ -4,10 +4,12 @@ import { BsCartPlus } from "react-icons/bs";
 import { useAuthStore } from "./../store/authStore";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useBookStore } from "../store/bookStore";
 
 const BookCard = ({ book, handleOpenModal }) => {
   const { user } = useAuthStore();
   const { addToCart } = useCartStore();
+  const { updateReviews } = useBookStore();
   const navigate = useNavigate();
   return (
     <div>
@@ -25,6 +27,7 @@ const BookCard = ({ book, handleOpenModal }) => {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
+                        onClick={() => updateReviews(book._id)}
                       >
                         <path
                           strokeLinecap="round"

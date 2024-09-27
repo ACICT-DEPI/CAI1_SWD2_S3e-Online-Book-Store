@@ -107,6 +107,26 @@ export const updateBook = async (req, res) => {
   res.status(201).json({ book });
 };
 
+export const updateReviews = async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    const user = req.user;
+    // const existingItem = user.cartItems.find((item) => item.id === bookId);
+    book.reviews = book.reviews + 1;
+    book.rating =
+      book.rating > 5 ? 5 : parseFloat((book.rating + 0.1).toFixed(1));
+    await book.save();
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).json({ message: "Book not found" });
+    }
+  } catch (error) {
+    console.log("Error in updateReviews controller", error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 export const deleteBook = async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);

@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import { useBookStore } from './../../store/bookStore';
-import Slider from './../../components/slider/Slider';
-import Services from './../../components/services/Services';
-import HeadingTitle from './../../components/heading-title/HeadingTitle';
-import BookSlider from './../../components/book-slider/BookSlider';
-
+import { useBookStore } from "./../../store/bookStore";
+import Slider from "./../../components/slider/Slider";
+import Services from "./../../components/services/Services";
+import HeadingTitle from "./../../components/heading-title/HeadingTitle";
+import BookSlider from "./../../components/book-slider/BookSlider";
 
 const HomePage = () => {
   const { getAllBooks, books } = useBookStore();

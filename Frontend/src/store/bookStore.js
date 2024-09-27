@@ -55,6 +55,17 @@ export const useBookStore = create((set, get) => ({
     }
   },
 
+  updateReviews: async (bookId) => {
+    try {
+      await axios.put(`/books/update-reviews/${bookId}`,{data:"review"});
+      get().getAllBooks();
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+      set({ loading: false });
+    }
+  },
+
   deleteBook: async (bookId) => {
     set({ loading: true });
     try {
