@@ -13,9 +13,9 @@ import NotFoundPage from "./../pages/NotFoundPage";
 import RegisterPage from "../pages/Registerpage";
 import LoginPage from "../pages/LoginPage";
 import CartPage from "../pages/cart/Cart";
-import ReviewsPage from './../pages/reviews/ReviewsPage';
+import ReviewsPage from "./../pages/reviews/ReviewsPage";
 import Authors from "./../pages/authors/Authors";
-import AboutUs from './../pages/about/aboutus';
+import AboutUs from "./../pages/about/aboutus";
 import ForgotPasswordPage from "./../pages/ForgotPasswordPage";
 import ResetPasswordPage from "./../pages/ResetPasswordPage";
 import EmailVerificationPage from "./../pages/EmailVerificationPage";
@@ -23,10 +23,11 @@ import BooksPage from "./../pages/Books/Books";
 import ProtectedRoute from "./../components/auth/ProtectedRoute";
 import RedirectAuthenticatedUser from "./../components/auth/RedirectAuthenticatedUser";
 import AuthorPage from "./../pages/AuthorPage";
-import PaymentSuccessPage from './../pages/PaymentSuccessPage';
+import PaymentSuccessPage from "./../pages/PaymentSuccessPage";
 import PaymentCancelPage from "../pages/PaymentCancelPage";
 import ProfilePage from "../pages/ProfilePage";
 import SettingPage from "../pages/SettingPage";
+import OrderPage from "../pages/OrderPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -130,7 +131,7 @@ const router = createBrowserRouter(
             </ProtectedRoute>
           }
         />
-          <Route
+        <Route
           path="/about"
           element={
             <ProtectedRoute>
@@ -159,6 +160,14 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute>
               <SettingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <ProtectedRoute>
+              <OrderPage />
             </ProtectedRoute>
           }
         />

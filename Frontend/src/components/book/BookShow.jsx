@@ -1,8 +1,8 @@
-import React from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useBookStore } from "./../../store/bookStore";
 import { useCartStore } from "./../../store/cartStore";
+import toast from "react-hot-toast";
 
 export default function BookShow() {
   const { books } = useBookStore();
@@ -31,7 +31,7 @@ export default function BookShow() {
                 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out"
               >
                 <Link
-                  to={`/book/${book.id}`}
+                  to={`/book/${book._id}`}
                   className="text-center text-blue-500 font-medium"
                 >
                   Quick view
@@ -51,7 +51,16 @@ export default function BookShow() {
 
             <div className="p-4">
               <button
-                onClick={() => addToCart(book)}
+                onClick={() =>
+                  book.inStock
+                    ? addToCart(book)
+                    : toast.error("Book is out of stock", {
+                        style: {
+                          backgroundColor: "black",
+                          color: "white",
+                        },
+                      })
+                }
                 className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-600 transition-colors"
               >
                 <BsCartPlus size={20} /> Add to Cart

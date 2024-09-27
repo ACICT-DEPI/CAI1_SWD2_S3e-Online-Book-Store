@@ -1,3 +1,4 @@
+import Book from "../models/book.model.js";
 import Order from "../models/order.model.js";
 import { stripe } from "../utils/stripe.js";
 
@@ -73,8 +74,6 @@ export const checkoutSuccess = async (req, res) => {
           }
         );
       }
-
-      // create a new Order
       const products = JSON.parse(session.metadata.products);
       const newOrder = new Order({
         user: session.metadata.userId,
@@ -106,5 +105,34 @@ export const checkoutSuccess = async (req, res) => {
       message: "Error processing successful checkout",
       error: error.message,
     });
+  }
+};
+
+export const getUserOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.user._id });
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const getOrderById = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    const bookIds = order.books.map((book) => book.book);
+    const books = await Book.find({ _id: { $in: bookIds } });
+    const orderItems = books.map((book) => {
+      const item = order.books.find(
+        (orderItem) => orderItem.book.toString() === book.id
+      );
+      return { ...book.toJSON(), quantity: item.quantity };
+    });
+    res.status(200).json({ ...order._doc, books: orderItems });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };

@@ -5,6 +5,8 @@ import axios from "../config/axios";
 export const useBookStore = create((set, get) => ({
   books: [],
   authorBooks: [],
+  wishList: [],
+  userOrders: [],
   loading: false,
 
   getAllBooks: async () => {
@@ -26,6 +28,36 @@ export const useBookStore = create((set, get) => ({
     } catch (error) {
       set({ error: "Failed to fetch books", loading: false });
       toast.error(error.response.data.error || "Failed to fetch books");
+    }
+  },
+
+  getWishList: async () => {
+    try {
+      const res = await axios.get("/books/wishlist");
+      set({ wishList: res.data });
+    } catch (error) {
+      set({ wishList: [] });
+      toast.error(error.response.data.message || "An error occurred", {
+        style: {
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    }
+  },
+
+  getUserOrders: async () => {
+    try {
+      const res = await axios.get("/payments/orders");
+      set({ userOrders: res.data });
+    } catch (error) {
+      set({ userOrders: [] });
+      toast.error(error.response.data.message || "An error occurred", {
+        style: {
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     }
   },
 
@@ -57,8 +89,15 @@ export const useBookStore = create((set, get) => ({
 
   updateReviews: async (bookId) => {
     try {
-      await axios.put(`/books/update-reviews/${bookId}`,{data:"review"});
+      const res = await axios.put(`/books/update-reviews/${bookId}`);
+      toast.success(res.data.message, {
+        style: {
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
       get().getAllBooks();
+      get().getWishList();
     } catch (error) {
       console.log(error);
       toast.error(error.message);

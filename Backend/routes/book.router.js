@@ -2,6 +2,7 @@ import express from "express";
 import {
   getAllBooks,
   getAuthorBooks,
+  getWishList,
   createBook,
   updateBook,
   updateReviews,
@@ -13,6 +14,7 @@ const router = express.Router();
 
 router.get("/", getAllBooks);
 router.get("/author-books", protectRoute, authorRoute, getAuthorBooks);
+router.get("/wishlist", protectRoute, getWishList);
 router.post("/", protectRoute, authorRoute, createBook);
 router.put("/:id", protectRoute, authorRoute, updateBook);
 router.put("/update-reviews/:id", protectRoute, updateReviews);

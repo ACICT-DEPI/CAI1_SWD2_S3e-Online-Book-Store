@@ -1,4 +1,4 @@
-import create from 'zustand';
+import {create} from 'zustand';
 
 export const useReviewStore = create((set) => {
   // Retrieve existing reviews from local storage to ensure its permanent existence 
