@@ -15,6 +15,7 @@ import LoginPage from "../pages/LoginPage";
 import CartPage from "../pages/cart/Cart";
 import ReviewsPage from './../pages/reviews/ReviewsPage';
 import Authors from "./../pages/authors/Authors";
+import AboutUs from './../pages/about/aboutus';
 import ForgotPasswordPage from "./../pages/ForgotPasswordPage";
 import ResetPasswordPage from "./../pages/ResetPasswordPage";
 import EmailVerificationPage from "./../pages/EmailVerificationPage";
@@ -126,6 +127,14 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute>
               <ReviewsPage />
+            </ProtectedRoute>
+          }
+        />
+          <Route
+          path="/about"
+          element={
+            <ProtectedRoute>
+              <AboutUs />
             </ProtectedRoute>
           }
         />

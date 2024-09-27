@@ -56,7 +56,7 @@ const ReviewsPage = () => {
                                 </div>
                             ))
                         ) : (
-                            <p className="text-gray-600">No reviews yet for this book</p>
+                            <p className="text-blue-500">No reviews yet for this book</p>
                         )}
                         <div className="flex justify-end mt-6">
                             <button
