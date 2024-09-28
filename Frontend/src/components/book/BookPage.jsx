@@ -24,10 +24,11 @@ const BookPage = () => {
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
-    addReview(book.title, reviewText); // Using book.title as key for reviews
+    addReview(book._id, reviewText); // Use book._id as the key for reviews
     setReviewText("");
     setShowModal(false);
-  };
+};
+
 
   return (
     <div className="h-[705px] container mx-auto px-4 py-12 flex items-center justify-center">
@@ -151,4 +152,4 @@ const BookPage = () => {
   );
 };
 
-export default BookPage;
+export default BookPage; 
