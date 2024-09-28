@@ -14,7 +14,7 @@ export default function BooksPage() {
   }, []);
 
   return (
-  <div  className="mt-0 pt-0" >
+  <div  className="mt- pt-0" >
   <SearchComponent books={books}  className=" "/>
     <div className="flex flex-col w-full min-h-screen bg-slate-100 py-10">
       <div className="container mx-auto px-4">

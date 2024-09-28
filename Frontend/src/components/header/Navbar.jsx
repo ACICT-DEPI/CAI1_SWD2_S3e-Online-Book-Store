@@ -111,7 +111,7 @@ const Navbar = ({ toggle, setToggle }) => {
           {user && (
             <button
               onClick={() => setToggle(!toggle)}
-              className="ml-4 md:hidden text-gray-800 text-3xl focus:outline-none"
+              className="ml-4 md:hidden text-gray-800 text-3xl focus:outline-none z-50"
             >
               {toggle ? <BsXLg /> : <BsList />}
             </button>

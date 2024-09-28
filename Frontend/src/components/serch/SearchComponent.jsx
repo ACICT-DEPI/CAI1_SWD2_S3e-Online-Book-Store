@@ -28,7 +28,7 @@ const SearchComponent = ({ books }) => {
 
 
   return (
-    <div className="fixed top-14 z-50   flex sm:justify-center md:justify-end w-full bg-white pb-1 md:pr-36 md:mt-2 lg:mt-0">
+    <div className="fixed top-14 z-40   flex sm:justify-center md:justify-end w-full bg-white pb-1 md:pr-36 md:mt-4 lg:mt-3">
       <div className="relative flex items-center border-b-2 rounded-lg md:w-1/2 lg:w-1/5 hover:border hover:border-blue-500 pr-36 ">
         <span className="ml-2 text-gray-400">
           <CiSearch />
