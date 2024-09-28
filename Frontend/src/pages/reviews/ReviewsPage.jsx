@@ -1,15 +1,14 @@
-
 import { useState } from "react";
 import { useReviewStore } from "../../store/reviewStore";
-import { books } from "../../data/books"; 
+import { useBookStore } from "../../store/bookStore"; 
 
 const ReviewsPage = () => {
-
     const [showModal, setShowModal] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
 
     const reviewsStore = useReviewStore((state) => state.reviews);
-    
+    const books = useBookStore((state) => state.books); // Getting books from the bookstore
+
     const handleImageClick = (book) => {
         setSelectedBook(book);
         setShowModal(true);
@@ -20,8 +19,8 @@ const ReviewsPage = () => {
         setSelectedBook(null);
     };
 
-    // Getting reviews based on title of the selectedBook
-    const reviews = selectedBook ? reviewsStore[selectedBook.title] || [] : [];
+    // Getting reviews based on the id of the selectedBook
+    const reviews = selectedBook ? reviewsStore[selectedBook._id] || [] : [];
 
 
     return (

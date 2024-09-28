@@ -81,7 +81,9 @@ const RegisterPage = () => {
   ));
 
   return (
-    <div className="h-[705px] flex items-center justify-center">
+    <div className="min-h-[705px] flex items-center justify-center bg-gray-100">
+      <div className="flex flex-col md:flex-row items-center justify-center w-[100%] h-full">
+        <img src="welcome.svg" className="w-[50%] h-full" />
       <div
         className="mx-auto max-w-md w-full bg-gray-300 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl 
 			overflow-hidden m-5"
@@ -116,6 +118,7 @@ const RegisterPage = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };

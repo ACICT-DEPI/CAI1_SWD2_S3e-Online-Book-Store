@@ -9,8 +9,9 @@ import { useBookStore } from "../store/bookStore";
 const BookCard = ({ book, handleOpenModal }) => {
   const { user } = useAuthStore();
   const { addToCart } = useCartStore();
-  const { updateReviews } = useBookStore();
+  const { updateReviews, wishList } = useBookStore();
   const navigate = useNavigate();
+  const isWishlisted = wishList.find((item) => item._id === book._id);
   return (
     <div>
       <div className="flex flex-col items-center justify-center ">
@@ -20,7 +21,11 @@ const BookCard = ({ book, handleOpenModal }) => {
               <div>
                 <div className="relative w-full mb-3">
                   <div className="absolute flex flex-col top-[-10px] right-[5px] p-3">
-                    <button className="transition ease-in duration-300 bg-gray-800  hover:text-red-500 shadow hover:shadow-md text-gray-500 rounded-full w-8 h-8 text-center p-1">
+                    <button
+                      className={`transition ease-in duration-300 bg-gray-800  hover:text-red-700 shadow hover:shadow-md ${
+                        isWishlisted ? "text-red-500" : "text-gray-500"
+                      }  rounded-full w-8 h-8 text-center p-1`}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"

@@ -22,6 +22,16 @@ export const getAuthorBooks = async (req, res) => {
   }
 };
 
+export const getWishList = async (req, res) => {
+  try {
+    const books = await Book.find({ _id: { $in: req.user.wishList } });
+    res.json(books);
+  } catch (error) {
+    console.log("Error in getWishList controller", error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 export const createBook = async (req, res) => {
   try {
     const {
@@ -109,15 +119,28 @@ export const updateBook = async (req, res) => {
 
 export const updateReviews = async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id);
+    const bookId = req.params.id;
+    const book = await Book.findById(bookId);
     const user = req.user;
-    // const existingItem = user.cartItems.find((item) => item.id === bookId);
-    book.reviews = book.reviews + 1;
-    book.rating =
-      book.rating > 5 ? 5 : parseFloat((book.rating + 0.1).toFixed(1));
-    await book.save();
+    const existingItem = user.wishList.find((item) => item.id === bookId);
     if (book) {
-      res.json(book);
+      let message = "";
+      if (!existingItem) {
+        book.reviews = book.reviews + 1;
+        book.rating =
+          book.rating >= 5 ? 5 : parseFloat((book.rating + 0.1).toFixed(1));
+        user.wishList.push(bookId);
+        message = "Book added to wish list";
+      } else {
+        book.reviews = book.reviews - 1;
+        book.rating =
+          book.rating <= 0 ? 0 : parseFloat((book.rating - 0.1).toFixed(1));
+        user.wishList = user.wishList.filter((item) => item.id !== bookId);
+        message = "Book removed from wish list";
+      }
+      await user.save();
+      await book.save();
+      res.status(200).json({ message });
     } else {
       res.status(404).json({ message: "Book not found" });
     }

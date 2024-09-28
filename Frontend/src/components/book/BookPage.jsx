@@ -10,6 +10,7 @@ import {
 import { useCartStore } from "../../store/cartStore";
 import { useReviewStore } from "../../store/reviewStore";
 import toast from "react-hot-toast";
+import { parseingDate } from './../../utils/index';
 
 const BookPage = () => {
   const { books } = useBookStore();
@@ -23,18 +24,18 @@ const BookPage = () => {
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
-    addReview(book.title, reviewText); // Using book.title as key for reviews
+    addReview(book._id, reviewText); // Use book._id as the key for reviews
     setReviewText("");
     setShowModal(false);
-  };
+};
+
 
   return (
-    <div className="container mx-auto px-4 py-12 bg-gray-100 min-h-screen">
+    <div className="h-[705px] container mx-auto px-4 py-12 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-xl overflow-hidden">
         <div className="md:flex">
           <div className="md:w-1/4 p-4">
             {" "}
-            {/* تم تصغير حجم الكتاب هنا */}
             <img
               src={book.image}
               alt={book.title}
@@ -43,7 +44,6 @@ const BookPage = () => {
           </div>
           <div className="md:w-3/4 p-8 flex flex-col justify-between">
             {" "}
-            {/* لضمان تناسب الحجم مع باقي المحتوى */}
             <div>
               <h1 className="text-4xl font-bold text-gray-800 mb-4">
                 {book.title}
@@ -66,7 +66,7 @@ const BookPage = () => {
                       ? addToCart(book)
                       : toast.error("Book is out of stock", {
                           style: {
-                            backgroundColor: "#f87171",
+                            backgroundColor: "black",
                             color: "white",
                           },
                         })
@@ -106,7 +106,7 @@ const BookPage = () => {
                 <div>
                   <small className="text-gray-500">Publication Date</small>
                   <p className="text-gray-700 font-semibold">
-                    {book.PublicationDate}
+                    {parseingDate(book.PublicationDate)}
                   </p>
                 </div>
               </div>
@@ -152,4 +152,4 @@ const BookPage = () => {
   );
 };
 
-export default BookPage;
+export default BookPage; 

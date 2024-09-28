@@ -13,7 +13,7 @@ const HomePage = () => {
   }, [getAllBooks]);
 
   return (
-    <div className="home">
+    <div>
       <Slider />
       <Services />
       <HeadingTitle title="Most gifted" />

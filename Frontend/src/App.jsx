@@ -5,10 +5,12 @@ import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import { useCartStore } from "./store/cartStore";
+import { useBookStore } from "./store/bookStore";
 
 function App() {
   const { isCheckingAuth, checkAuth, user } = useAuthStore();
   const { getCartItems } = useCartStore();
+  const { getWishList } = useBookStore();
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -17,7 +19,8 @@ function App() {
     if (!user) return;
 
     getCartItems();
-  }, [getCartItems, user]);
+    getWishList();
+  }, [getCartItems, getWishList, user]);
 
   if (isCheckingAuth) return <LoadingSpinner />;
 

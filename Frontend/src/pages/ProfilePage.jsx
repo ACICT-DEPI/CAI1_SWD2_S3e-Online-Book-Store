@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { parseingDate } from "../utils";
+import { useBookStore } from "../store/bookStore";
+import { useEffect } from "react";
+import Rating from "../components/book-slider/Rating";
 
 const ProfilePage = () => {
   const { user } = useAuthStore();
+  const { getWishList, wishList, getUserOrders, userOrders } = useBookStore();
+
+  useEffect(() => {
+    getWishList();
+    getUserOrders();
+  }, [getUserOrders, getWishList]);
+
   return (
     <div className="min-h-screen bg-gray-100 py-12">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-3">
-          {/* Profile Sidebar */}
           <div className="bg-gradient-to-r from-blue-600 to-blue-500 p-8 text-center flex flex-col items-center">
             <img
               className="rounded-full h-32 w-32 object-cover border-4 border-white shadow-md"
@@ -51,30 +60,23 @@ const ProfilePage = () => {
             <section className="mb-8">
               <h3 className="text-2xl font-semibold text-gray-800">Wishlist</h3>
               <ul className="mt-4 space-y-4">
-                <li className="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                  <div>
-                    <p className="font-medium">Dune by Frank Herbert</p>
-                    <div className="text-yellow-400 mt-1 flex">
-                      <span>★★★★★</span>
-                      <span className="ml-1 text-gray-500">4.8</span>
+                {wishList.map((book) => (
+                  <li
+                    key={book._id}
+                    className="bg-gray-100 p-4 rounded-lg flex justify-between items-center"
+                  >
+                    <div>
+                      <p className="font-medium mb-1">{book.title}</p>
+                      <Rating rating={book.rating} />
                     </div>
-                  </div>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    View Book
-                  </a>
-                </li>
-                <li className="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                  <div>
-                    <p className="font-medium">Atomic Habits by James Clear</p>
-                    <div className="text-yellow-400 mt-1 flex">
-                      <span>★★★★☆</span>
-                      <span className="ml-1 text-gray-500">4.5</span>
-                    </div>
-                  </div>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    View Book
-                  </a>
-                </li>
+                    <Link
+                      to={`/book/${book._id}`}
+                      className="text-blue-600 hover:underline"
+                    >
+                      View Book
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </section>
             <section className="mb-8">
@@ -82,28 +84,25 @@ const ProfilePage = () => {
                 Order History
               </h3>
               <ul className="mt-4 space-y-4">
-                <li className="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                  <div>
-                    <p className="font-medium">Order #12345</p>
-                    <p className="text-gray-500 text-sm">
-                      Delivered on March 12, 2024
-                    </p>
-                  </div>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    View Details
-                  </a>
-                </li>
-                <li className="bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                  <div>
-                    <p className="font-medium">Order #12344</p>
-                    <p className="text-gray-500 text-sm">
-                      Delivered on February 28, 2024
-                    </p>
-                  </div>
-                  <a href="#" className="text-blue-600 hover:underline">
-                    View Details
-                  </a>
-                </li>
+                {userOrders.map((order) => (
+                  <li
+                    key={order._id}
+                    className="bg-gray-100 p-4 rounded-lg flex justify-between items-center"
+                  >
+                    <div>
+                      <p className="font-medium">Order #{order._id}</p>
+                      <p className="text-gray-500 text-sm">
+                        Delivered on {parseingDate(order.createdAt)}
+                      </p>
+                    </div>
+                    <Link
+                      to={`/order/${order._id}`}
+                      className="text-blue-600 hover:underline"
+                    >
+                      View Details
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </section>
           </div>

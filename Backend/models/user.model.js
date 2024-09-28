@@ -34,6 +34,14 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
+    wishList: [
+      {
+        book: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Book",
+        },
+      },
+    ],
     role: {
       type: String,
       enum: ["author", "user"],

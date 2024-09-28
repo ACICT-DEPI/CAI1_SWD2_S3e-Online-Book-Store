@@ -103,21 +103,9 @@ export const books = [
     PublicationDate: "23 March 2017",
     inStock: true,
   },
+
   {
     id: 9,
-    price: 12.58,
-    rating: 5,
-    title: "Good Vibes, Good Life",
-    author: "Vex King",
-    reviews: "22,252",
-    image: "/books/it-ends-with-us.jpg",
-    printLength: 325,
-    language: "English",
-    PublicationDate: "4 December 2018",
-    inStock: true,
-  },
-  {
-    id: 10,
     price: 5.98,
     rating: 4.5,
     title: "Beginning Drawing Atelier",
