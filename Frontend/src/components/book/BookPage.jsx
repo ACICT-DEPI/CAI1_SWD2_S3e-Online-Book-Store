@@ -31,7 +31,7 @@ const BookPage = () => {
 
 
   return (
-    <div className="h-[705px] container mx-auto px-4 py-12 flex items-center justify-center">
+    <div className="min-h-[705px] container mx-auto px-4 py-12 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-xl overflow-hidden">
         <div className="md:flex">
           <div className="md:w-1/4 p-4">

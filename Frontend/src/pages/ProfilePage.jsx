@@ -28,12 +28,12 @@ const ProfilePage = () => {
             <p className="text-blue-200 text-sm mt-1">
               Avid Reader & Book Enthusiast
             </p>
-            <Link
+            {/* <Link
               to={"/setting"}
               className="bg-white text-blue-600 font-semibold mt-6 py-2 px-6 rounded-full shadow hover:bg-blue-50 transition duration-200"
             >
               Edit Profile
-            </Link>
+            </Link> */}
           </div>
           <div className="col-span-2 p-8">
             <section className="mb-8">

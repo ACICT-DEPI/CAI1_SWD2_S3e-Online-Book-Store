@@ -69,8 +69,25 @@ export const useBookStore = create((set, get) => ({
         books: [...prevState.books, res.data.book],
         loading: false,
       }));
+      toast.success("Book added successfully", {
+        style: {
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     } catch (error) {
-      toast.error(error.message);
+      toast.error(
+        error.response.status == 413
+          ? "The uploaded image exceeds the allowed size limit. Please ensure that the image size is less than 100 KB"
+          : error.message,
+        {
+          style: {
+            backgroundColor: "black",
+            color: "white",
+          },
+          duration: 5000,
+        }
+      );
       set({ loading: false });
     }
   },
@@ -81,8 +98,26 @@ export const useBookStore = create((set, get) => ({
       await axios.put(`/books/${bookId}`, bookData);
       set({ loading: false });
       get().getAuthorBooks();
+      get().getAllBooks();
+      toast.success("Book updated successfully", {
+        style: {
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     } catch (error) {
-      toast.error(error.message);
+      toast.error(
+        error.response.status == 413
+          ? "The uploaded image exceeds the allowed size limit. Please ensure that the image size is less than 100 KB"
+          : error.message,
+        {
+          style: {
+            backgroundColor: "black",
+            color: "white",
+          },
+          duration: 5000,
+        }
+      );
       set({ loading: false });
     }
   },
@@ -111,6 +146,12 @@ export const useBookStore = create((set, get) => ({
       await axios.delete(`/books/${bookId}`);
       set((prevBooks) => ({
         books: prevBooks.books.filter((book) => book._id !== bookId),
+        loading: false,
+      }));
+      set((prevBooks) => ({
+        authorBooks: prevBooks.authorBooks.filter(
+          (book) => book._id !== bookId
+        ),
         loading: false,
       }));
     } catch (error) {

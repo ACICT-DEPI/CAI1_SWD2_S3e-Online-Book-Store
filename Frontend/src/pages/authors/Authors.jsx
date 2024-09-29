@@ -1,30 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authors } from "../../data/authors";
-import { books } from "../../data/books"; 
 import { BsCartPlus } from "react-icons/bs";
 import { useCartStore } from "../../store/cartStore";
+import { useBookStore } from "../../store/bookStore";
 
-  const Authors = () => {
-    const [search, setSearch] = useState("");
-    const { addToCart } = useCartStore();
+const Authors = () => {
+  const [search, setSearch] = useState("");
+  const { addToCart } = useCartStore();
+  const { books } = useBookStore();
 
-    const [selectedAuthor, setSelectedAuthor] = useState(null);
-    const [showPopup, setShowPopup] = useState(false); 
+  const [selectedAuthor, setSelectedAuthor] = useState(null);
+  const [authorBooks, setAuthorBooks] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
 
-    const handleAuthorClick = (authorName) => {
-      setSelectedAuthor(authorName); 
-      setShowPopup(true); 
-    };
+  const handleAuthorClick = (authorName) => {
+    setSelectedAuthor(authorName);
+    setShowPopup(true);
+  };
 
-    const handleClosePopup = () => {
-      setShowPopup(false); 
-      setSelectedAuthor(null); 
-    };
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    setSelectedAuthor(null);
+  };
 
-  const authorBooks = books.filter((book) => book.author === selectedAuthor);
+  useEffect(() => {
+    setAuthorBooks(
+      [...books].filter((book) => book.authorName === selectedAuthor)
+    );
+  }, [books, selectedAuthor]);
 
   return (
-    <section className="p-5 bg-gray-100">
+    <section className="mx-auto p-5 bg-gray-100">
       <div className="mb-5">
         <input
           value={search}
@@ -35,7 +41,7 @@ import { useCartStore } from "../../store/cartStore";
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-items-center">
         {authors
           .filter((a) => a.name.toLowerCase().includes(search.toLowerCase()))
           .map((author) => (
@@ -49,7 +55,9 @@ import { useCartStore } from "../../store/cartStore";
                 alt={author.name}
                 className="w-full h-40 rounded-lg object-cover"
               />
-              <h2 className="text-center text-lg font-semibold mt-4 mb-2">{author.name}</h2>
+              <h2 className="text-center text-lg font-semibold mt-4 mb-2">
+                {author.name}
+              </h2>
             </div>
           ))}
       </div>
@@ -57,26 +65,29 @@ import { useCartStore } from "../../store/cartStore";
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
           <div className="bg-white p-8 rounded-lg max-w-lg w-80 relative">
-            <span className="absolute top-3 right-3 cursor-pointer text-2xl p-2 hover:text-red-500" onClick={handleClosePopup}>
+            <span
+              className="absolute top-3 right-3 cursor-pointer text-2xl p-2 hover:text-red-500"
+              onClick={handleClosePopup}
+            >
               ×
             </span>
-            <h2 className="text-lg mb-4 text-blue-600">{selectedAuthor}&apos;s Books</h2> 
+            <h2 className="text-lg mb-4 text-blue-600">
+              {selectedAuthor}&apos;s Books
+            </h2>
             <div className="flex flex-col gap-5">
-              {authorBooks.length > 0 ? (
+              {authorBooks && authorBooks.length > 0 ? (
                 authorBooks.map((book) => (
-                  <div key={book.id} className="flex items-center gap-3">
+                  <div key={book._id} className="flex items-center gap-3">
                     <img
                       src={book.image}
                       alt={book.title}
                       className="w-20 h-30 object-cover rounded-md"
                     />
-                  
                     <button
-                      onClick={() => addToCart({ ...book, quantity: 1 })}
+                      onClick={() => addToCart(book)}
                       className="bg-blue-600 text-white ml-10 px-7 py-1 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105 flex items-center space-x-1"
                     >
                       <BsCartPlus />
-                  
                     </button>
                   </div>
                 ))

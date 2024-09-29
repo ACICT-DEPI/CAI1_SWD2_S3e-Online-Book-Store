@@ -9,13 +9,14 @@ export const useAuthStore = create((set) => ({
   isCheckingAuth: true,
   message: null,
 
-  signup: async ({ email, password, name }) => {
+  signup: async ({ email, password, name, role }) => {
     set({ isLoading: true, error: null });
     try {
       const response = await axios.post(`/auth/signup`, {
         email,
         password,
         name,
+        role,
       });
       set({
         user: response.data.user,
@@ -31,7 +32,7 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  login: async ({email, password}) => {
+  login: async ({ email, password }) => {
     set({ isLoading: true, error: null });
     try {
       const response = await axios.post(`/auth/login`, {

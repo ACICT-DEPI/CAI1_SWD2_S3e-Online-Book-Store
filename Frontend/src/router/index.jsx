@@ -84,7 +84,7 @@ const router = createBrowserRouter(
           }
         />
         <Route
-          path="/Books"
+          path="/books"
           element={
             <ProtectedRoute>
               <BooksPage />

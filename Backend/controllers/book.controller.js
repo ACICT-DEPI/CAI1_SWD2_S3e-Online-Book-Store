@@ -95,7 +95,7 @@ export const updateBook = async (req, res) => {
   } = req.body;
 
   let cloudinaryResponse = null;
-  if (image) {
+  if (image != book.image) {
     cloudinaryResponse = await cloudinary.uploader.upload(image, {
       folder: "books",
       public_id: book.image.split("/").pop().split(".")[0],
@@ -109,7 +109,7 @@ export const updateBook = async (req, res) => {
   book.printLength = printLength;
   book.language = language;
   book.PublicationDate = PublicationDate;
-  book.inStock = true;
+  book.inStock = inStock;
   book.image = cloudinaryResponse?.secure_url
     ? cloudinaryResponse.secure_url
     : book.image;

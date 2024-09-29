@@ -10,17 +10,18 @@ import { useBookStore } from "./store/bookStore";
 function App() {
   const { isCheckingAuth, checkAuth, user } = useAuthStore();
   const { getCartItems } = useCartStore();
-  const { getWishList } = useBookStore();
+  const { getWishList, getAllBooks } = useBookStore();
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
   useEffect(() => {
     if (!user) return;
-
+    getAllBooks();
     getCartItems();
     getWishList();
-  }, [getCartItems, getWishList, user]);
+  }, [getAllBooks, getCartItems, getWishList, user]);
 
   if (isCheckingAuth) return <LoadingSpinner />;
 

@@ -1,6 +1,6 @@
 const Button = ({ children, className, width = "w-full", ...rest }) => {
   return (
-    <button className={`${className} ${width} rounded-md text-white`} {...rest}>
+    <button className={`${className} ${width} rounded-md text-white `} {...rest}>
       {children}
     </button>
   );

@@ -121,7 +121,7 @@ const Navbar = ({ toggle, setToggle }) => {
               Home
             </NavLink>
             <NavLink
-              to="/Books"
+              to="/books"
               onClick={() => setToggle(false)}
               className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium transition duration-300 ease-in-out flex items-center"
             >

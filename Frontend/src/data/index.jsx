@@ -40,3 +40,4 @@ export const LOGIN_FORM = [
     icon: () => <LuLock className="size-5 text-blue-500" />,
   },
 ];
+

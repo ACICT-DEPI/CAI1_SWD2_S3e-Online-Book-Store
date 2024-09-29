@@ -11,11 +11,10 @@ export default function BookShow() {
   return (
     <div className="flex justify-center py-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-lg mx-auto px-4">
-        {books.map((book, index) => {
-          console.log(book); // Log the book object
+        {books.map((book) => {
           return (
             <div
-              key={index}
+              key={book._id}
               className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer group hover:shadow-2xl transition-transform transform hover:scale-105 w-full max-w-md"
             >
               <div className="relative">

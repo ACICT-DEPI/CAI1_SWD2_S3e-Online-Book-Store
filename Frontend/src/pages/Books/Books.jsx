@@ -1,4 +1,3 @@
-import React from "react";
 import BookShow from "../../components/book/BookShow";
 
 export default function BooksPage() {
