@@ -6,7 +6,6 @@ import {
 
 import HomePage from "../pages/home/HomePage";
 import BookPage from "../components/book/BookPage";
-import SellPage from "../pages/sellBooks/SellPage";
 import RootLayout from "./../pages/Layout";
 import ErrorHandler from "./../components/errors/ErrorHandler";
 import NotFoundPage from "./../pages/NotFoundPage";
@@ -72,14 +71,6 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute>
               <BookPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/sellBook"
-          element={
-            <ProtectedRoute>
-              <SellPage />
             </ProtectedRoute>
           }
         />

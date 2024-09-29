@@ -3,6 +3,7 @@ import { authors } from "../../data/authors";
 import { BsCartPlus } from "react-icons/bs";
 import { useCartStore } from "../../store/cartStore";
 import { useBookStore } from "../../store/bookStore";
+import toast from "react-hot-toast";
 
 const Authors = () => {
   const [search, setSearch] = useState("");
@@ -84,7 +85,16 @@ const Authors = () => {
                       className="w-20 h-30 object-cover rounded-md"
                     />
                     <button
-                      onClick={() => addToCart(book)}
+                      onClick={() =>
+                        book.inStock
+                          ? addToCart(book)
+                          : toast.error("Book is out of stock", {
+                              style: {
+                                backgroundColor: "black",
+                                color: "white",
+                              },
+                            })
+                      }
                       className="bg-blue-600 text-white ml-10 px-7 py-1 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105 flex items-center space-x-1"
                     >
                       <BsCartPlus />

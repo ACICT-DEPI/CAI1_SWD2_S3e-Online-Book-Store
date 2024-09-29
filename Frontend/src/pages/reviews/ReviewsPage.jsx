@@ -30,7 +30,7 @@ const ReviewsPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {books.map((book) => (
           <div
-            key={book.id}
+            key={book._id}
             className="bg-gray-100 p-10 rounded-md cursor-pointer text-center"
             onClick={() => handleImageClick(book)}
           >

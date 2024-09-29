@@ -24,7 +24,7 @@ const BookPage = () => {
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
-    addReview(book._id, reviewText); // Use book._id as the key for reviews
+    addReview(book._id, reviewText); 
     setReviewText("");
     setShowModal(false);
 };
