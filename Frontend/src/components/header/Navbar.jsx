@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useCartStore } from "./../../store/cartStore";
 import { useAuthStore } from "./../../store/authStore";
 import { LuLock, LuLogIn, LuUserPlus } from "react-icons/lu";
@@ -9,10 +9,18 @@ const Navbar = ({ toggle, setToggle }) => {
   const { user } = useAuthStore();
   const isAuthor = user?.role === "author";
   const { cart } = useCartStore();
+  const location = useLocation();
+
+  // Check if we are on the Books page
+  const isBooksPage = location.pathname === '/Books';
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-lg z-50 p-3">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <nav
+    className={`fixed top-0 left-0 w-full bg-white shadow-lg z-50 p-3 ${
+      isBooksPage ? 'shadow-none pb-0 pt-1' : 'shadow-lg'
+    }`}
+  >
+      <div className="container mx-auto px-4 py-3 flex justify-between items-center ">
         <Link
           to="/"
           className="text-xl font-bold flex items-center text-gray-800"
@@ -103,7 +111,7 @@ const Navbar = ({ toggle, setToggle }) => {
           {user && (
             <button
               onClick={() => setToggle(!toggle)}
-              className="ml-4 md:hidden text-gray-800 text-3xl focus:outline-none"
+              className="ml-4 md:hidden text-gray-800 text-3xl focus:outline-none z-50"
             >
               {toggle ? <BsXLg /> : <BsList />}
             </button>

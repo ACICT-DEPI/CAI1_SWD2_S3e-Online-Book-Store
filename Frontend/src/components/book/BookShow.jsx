@@ -1,20 +1,38 @@
+import React, { useState } from 'react';
 import { BsCartPlus } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import { useBookStore } from "./../../store/bookStore";
 import { useCartStore } from "./../../store/cartStore";
-import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
+import Modal from "../modal/modal";
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function BookShow() {
   const { books } = useBookStore();
   const { addToCart } = useCartStore();
+  const { updateReviews, wishList } = useBookStore();
+  const [openModal, setOpenModal] = useState(false);
+  const [bookData, setBookData] = useState(null);
+  const navigate = useNavigate();
+
+  const handleClic = (id) => {
+    navigate(`/book/${id}`);
+  };
+
+  const handleOpenModal = (item) => {
+    setOpenModal(true);
+    setBookData(item);
+  };
 
   return (
     <div className="flex justify-center py-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-lg mx-auto px-4">
-        {books.map((book) => {
+        {books.map((book, index) => {
+          console.log(book); // Log the book object
           return (
             <div
-              key={book._id}
+              key={index}
               className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer group hover:shadow-2xl transition-transform transform hover:scale-105 w-full max-w-md"
             >
               <div className="relative">
@@ -40,37 +58,35 @@ export default function BookShow() {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between p-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {book.title}
-                </h3>
-
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Price: ${book.price}
-                </h3>
-              </div>
-
-              <div className="p-4">
-                <button
-                  onClick={() =>
-                    book.inStock
-                      ? addToCart(book)
-                      : toast.error("Book is out of stock", {
-                          style: {
-                            backgroundColor: "black",
-                            color: "white",
-                          },
-                        })
-                  }
-                  className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-600 transition-colors"
-                >
-                  <BsCartPlus size={20} /> Add to Cart
+              <div className='absolute bottom-0 w-full px-2 opacity-0 
+              translate-y-full group-hover:opacity-100 group-hover:translate-y-0 
+              transition-all duration-700 ease-in-out bg-white rounded-b-xl'>
+                <button 
+                  onClick={() => handleOpenModal(book)}
+                  className='bg-white text-black px-4 py-2 w-full rounded-b-xl'>
+                  Quick view
                 </button>
               </div>
             </div>
-          );
-        })}
-      </div>
+
+            <div className='py-4 px-2'>
+              <p className='text-center'>{book.title}</p>
+              <h3 className='text-center'>Price: ${book.price}</h3>
+            </div>
+
+            <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out pb-2 px-2'>
+              <button
+                onClick={() => addToCart(book)}
+                className='bg-blue-500 text-white px-4 py-2 rounded-lg w-full flex items-center justify-center gap-2'
+              >
+                <BsCartPlus size={20} /> Add to Cart
+              </button>
+            </div>
+          </div>
+        );
+      })}
+      {/* هنا يتم عرض المودال لو الـ openModal بـ true */}
+      {openModal && <Modal bookData={bookData} setOpenModal={setOpenModal} />}
     </div>
   );
 }
