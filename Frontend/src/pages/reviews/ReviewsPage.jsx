@@ -39,8 +39,8 @@ const ReviewsPage = () => {
               alt={book.title}
               className="w-44 h-55 rounded-md mx-auto"
             />
-            <h2 className="text-lg font-bold mt-2">{book.title}</h2>
-            <p className="text-gray-600">{book.authorName}</p>
+            <h2 className="text-lg font-bold mt-2 text-blue-600">{book.title}</h2>
+            <p className="text-grey-600">{book.authorName}</p>
           </div>
         ))}
       </div>

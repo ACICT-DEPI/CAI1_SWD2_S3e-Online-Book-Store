@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { authors } from "../../data/authors";
 import { useBookStore } from "../../store/bookStore";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Authors = () => {
   const [search, setSearch] = useState("");
@@ -81,14 +81,21 @@ const Authors = () => {
                       alt={book.title}
                       className="w-20 h-30 object-cover rounded-md"
                     />
-                    <div className="flex flex-col">
-                      <Link
-                        to={`/book/${book._id}`} // Link to the book details
-                        className="bg-blue-600 text-white ml-10 px-8 py-1 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105 flex items-center space-x-1 mt-2"
-                      >
-                        Details
-                      </Link>
-                    </div>
+                    <button
+                      onClick={() =>
+                        book.inStock
+                          ? addToCart(book)
+                          : toast.error("Book is out of stock", {
+                              style: {
+                                backgroundColor: "black",
+                                color: "white",
+                              },
+                            })
+                      }
+                      className="bg-blue-600 text-white ml-10 px-7 py-1 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105 flex items-center space-x-1"
+                    >
+                      <BsCartPlus />
+                    </button>
                   </div>
                 ))
               ) : (
