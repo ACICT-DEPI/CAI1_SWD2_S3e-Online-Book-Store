@@ -40,7 +40,7 @@ export default function BookShow() {
               <img
                 src={book.image}
                 alt={book.title}
-                className="h-full rounded-xl"
+                className="w-full h-[300px] object-contain"
               />
 
               <div className="absolute top-3 right-3 bg-white flex flex-col space-y-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">

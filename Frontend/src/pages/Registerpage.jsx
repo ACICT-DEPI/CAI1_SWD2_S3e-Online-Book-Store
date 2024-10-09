@@ -97,7 +97,7 @@ const RegisterPage = () => {
             </h2>
             <form className="space-y-4" onSubmit={handleSubmit(handleSignUp)}>
               {renderRegisterForm}
-              {/* <Button
+              <Button
                 className="mt-5 w-full py-3 px-4 bg-gradient-to-r from-gray-200 to-gray-300  
 						font-bold rounded-lg shadow-lg hover:from-gray-300
 						hover:to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
@@ -114,7 +114,7 @@ const RegisterPage = () => {
                 ) : (
                   "Join As Author"
                 )}
-              </Button> */}
+              </Button>
               <Button
                 className="mt-5 w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white 
 						font-bold rounded-lg shadow-lg hover:from-blue-600

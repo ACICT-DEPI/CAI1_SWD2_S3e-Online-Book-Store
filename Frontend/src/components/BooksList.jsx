@@ -83,6 +83,7 @@ const BooksList = () => {
       language: "",
       PublicationDate: "",
       image: "",
+      inStock: selectedBook.inStock,
     });
     setNewImage(null);
     closeEditModal();
@@ -349,6 +350,7 @@ const BooksList = () => {
                       </span>
                     )}
                     <Button
+                    width="w-fit"
                       onClick={() =>
                         setSelectedBook({
                           ...selectedBook,
@@ -359,7 +361,7 @@ const BooksList = () => {
                         selectedBook.inStock
                           ? "bg-green-400 hover:bg-green-500"
                           : "bg-red-400 hover:bg-red-500"
-                      }  p-2 w-fit ml-5`}
+                      }  p-2 ml-5`}
                       type="button"
                     >
                       {selectedBook.inStock ? (

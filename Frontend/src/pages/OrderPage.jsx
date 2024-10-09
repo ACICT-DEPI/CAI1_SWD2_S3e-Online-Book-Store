@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "../config/axios";
-import { parseingDate } from './../utils/index';
+import { parseingDate } from "./../utils/index";
 
 const OrderPage = () => {
   const { id } = useParams();
@@ -9,7 +9,7 @@ const OrderPage = () => {
 
   const getOrder = async () => {
     const res = await axios.get(`/payments/orders/${id}`);
-    setOrder(res.data)
+    setOrder(res.data);
   };
 
   useEffect(() => {

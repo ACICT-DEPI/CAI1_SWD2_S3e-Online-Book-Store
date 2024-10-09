@@ -4,6 +4,7 @@ import { useAuthStore } from "./../../store/authStore";
 import { LuLock, LuLogIn, LuUserPlus } from "react-icons/lu";
 import { BsBook, BsCart2, BsXLg, BsList } from "react-icons/bs";
 import UserMenu from "../UserMenu";
+import { FaRegHeart } from "react-icons/fa6";
 
 const Navbar = ({ toggle, setToggle }) => {
   const { user } = useAuthStore();
@@ -12,14 +13,14 @@ const Navbar = ({ toggle, setToggle }) => {
   const location = useLocation();
 
   // Check if we are on the Books page
-  const isBooksPage = location.pathname === '/Books';
+  const isBooksPage = location.pathname === "/Books";
 
   return (
     <nav
-    className={`fixed top-0 left-0 w-full bg-white shadow-lg z-50 p-3 ${
-      isBooksPage ? 'shadow-none pb-0 pt-1' : 'shadow-lg'
-    }`}
-  >
+      className={`fixed top-0 left-0 w-full bg-white shadow-lg z-50 p-3 ${
+        isBooksPage ? "shadow-none pb-0 pt-1" : "shadow-lg"
+      }`}
+    >
       <div className="container mx-auto px-4 py-3 flex justify-between items-center ">
         <Link
           to="/"
@@ -89,7 +90,15 @@ const Navbar = ({ toggle, setToggle }) => {
         )}
         <div className="relative flex items-center space-x-3">
           {user ? (
-            <UserMenu />
+            <>
+              <NavLink
+                to={"/wish-list"}
+                className="text-gray-600 hover:text-red-600 px-3 py-1 rounded-md font-medium transition duration-300 ease-in-out flex items-center"
+              >
+                <FaRegHeart size={25}/>
+              </NavLink>
+              <UserMenu />
+            </>
           ) : (
             <>
               <Link

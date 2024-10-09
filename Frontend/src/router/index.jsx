@@ -25,8 +25,10 @@ import AuthorPage from "./../pages/AuthorPage";
 import PaymentSuccessPage from "./../pages/PaymentSuccessPage";
 import PaymentCancelPage from "../pages/PaymentCancelPage";
 import ProfilePage from "../pages/ProfilePage";
-import SettingPage from "../pages/SettingPage";
 import OrderPage from "../pages/OrderPage";
+import EditProfile from "../pages/EditProfile";
+import WishListPage from "../pages/WishListPage";
+import OrdersPage from "../pages/OrdersPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -147,10 +149,26 @@ const router = createBrowserRouter(
           }
         />
         <Route
-          path="/setting"
+          path="/edit-profile"
           element={
             <ProtectedRoute>
-              <SettingPage />
+              <EditProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/wish-list"
+          element={
+            <ProtectedRoute>
+              <WishListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <OrdersPage />
             </ProtectedRoute>
           }
         />

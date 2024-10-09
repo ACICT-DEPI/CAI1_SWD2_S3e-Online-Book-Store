@@ -17,8 +17,8 @@ function App() {
   }, [checkAuth]);
 
   useEffect(() => {
-    if (!user) return;
     getAllBooks();
+    if (!user) return;
     getCartItems();
     getWishList();
   }, [getAllBooks, getCartItems, getWishList, user]);
@@ -34,3 +34,5 @@ function App() {
 }
 
 export default App;
+
+// 4000056655665556

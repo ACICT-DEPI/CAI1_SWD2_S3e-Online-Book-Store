@@ -11,7 +11,9 @@ const BookCard = ({ book, handleOpenModal }) => {
   const { addToCart } = useCartStore();
   const { updateReviews, wishList } = useBookStore();
   const navigate = useNavigate();
-  const isWishlisted = wishList.find((item) => item._id === book._id);
+  const isWishlisted = user
+    ? wishList.find((item) => item._id === book._id)
+    : false;
   return (
     <div>
       <div className="flex flex-col items-center justify-center ">
@@ -32,7 +34,9 @@ const BookCard = ({ book, handleOpenModal }) => {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        onClick={() => updateReviews(book._id)}
+                        onClick={() =>
+                          user ? updateReviews(book._id) : navigate("/login")
+                        }
                       >
                         <path
                           strokeLinecap="round"
@@ -106,9 +110,7 @@ const BookCard = ({ book, handleOpenModal }) => {
                     <span>Add Cart</span>
                   </button>
                   <button
-                    onClick={() =>
-                      user ? handleOpenModal(book) : navigate("/login")
-                    }
+                    onClick={() => handleOpenModal(book)}
                     className="transition ease-in duration-300 bg-gray-700 hover:bg-gray-800 border hover:border-gray-500 border-gray-700 hover:text-white  hover:shadow-lg text-gray-400 rounded-full w-9 h-9 text-center p-2"
                   >
                     <svg
