@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { authors } from "../../data/authors";
 import { useBookStore } from "../../store/bookStore";
-import toast from "react-hot-toast";
+import { Link } from "react-router-dom"; 
 
 const Authors = () => {
   const [search, setSearch] = useState("");
@@ -28,7 +28,7 @@ const Authors = () => {
   }, [books, selectedAuthor]);
 
   return (
-    <section className="mx-auto p-5 bg-gray-100">
+    <section className="p-5 bg-gray-100">
       <div className="mb-5">
         <input
           value={search}
@@ -39,7 +39,7 @@ const Authors = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {authors
           .filter((a) => a.name.toLowerCase().includes(search.toLowerCase()))
           .map((author) => (
@@ -81,21 +81,16 @@ const Authors = () => {
                       alt={book.title}
                       className="w-20 h-30 object-cover rounded-md"
                     />
-                    <button
-                      onClick={() =>
-                        book.inStock
-                          ? addToCart(book)
-                          : toast.error("Book is out of stock", {
-                              style: {
-                                backgroundColor: "black",
-                                color: "white",
-                              },
-                            })
-                      }
-                      className="bg-blue-600 text-white ml-10 px-7 py-1 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105 flex items-center space-x-1"
-                    >
-                      <BsCartPlus />
-                    </button>
+                    <div className="flex flex-col">
+                  
+                      
+                      <Link
+                        to={`/book/${book._id}`} // Link to the book details
+                        className="bg-blue-600 text-white ml-10 px-8 py-1 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105 flex items-center space-x-1 mt-2"
+                      >
+                        Details
+                      </Link>
+                    </div>
                   </div>
                 ))
               ) : (
