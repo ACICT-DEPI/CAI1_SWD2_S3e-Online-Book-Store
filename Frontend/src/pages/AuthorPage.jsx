@@ -3,6 +3,7 @@ import CreateBookForm from "../components/CreateBookForm";
 import BooksList from "../components/BooksList";
 import { LuBarChart, LuPlusCircle } from "react-icons/lu";
 import { BsBookshelf } from "react-icons/bs";
+import Analytics from "../components/Analytics";
 
 const tabs = [
   { id: "add", label: "Add Book", icon: LuPlusCircle },
@@ -35,6 +36,7 @@ const AuthorPage = () => {
         </div>
         {activeTab === "add" && <CreateBookForm />}
         {activeTab === "books" && <BooksList />}
+        {activeTab === "analytics" && <Analytics />}
       </div>
     </div>
   );

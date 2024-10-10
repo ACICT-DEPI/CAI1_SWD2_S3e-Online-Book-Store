@@ -10,6 +10,7 @@ import authRoutes from "./routes/auth.route.js";
 import bookRoutes from "./routes/book.router.js";
 import cartRoutes from "./routes/cart.route.js";
 import paymentRoutes from "./routes/payment.route.js";
+import analyticsRoutes from "./routes/analytics.route.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/payments", paymentRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
