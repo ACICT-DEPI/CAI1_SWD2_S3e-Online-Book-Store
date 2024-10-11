@@ -23,6 +23,6 @@ router.post("/verify-email", verifyEmail);
 router.post("/forgot-password", forgotPassword);
 
 router.post("/reset-password/:token", resetPassword);
-router.post("/change-password", changePassword);
+router.post("/change-password", protectRoute, changePassword);
 
 export default router;
