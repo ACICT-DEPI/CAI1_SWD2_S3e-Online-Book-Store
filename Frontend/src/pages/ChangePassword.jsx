@@ -13,7 +13,7 @@ const ChangePassword = () => {
     formState: { errors },
   } = useForm();
 
-  const { changePassword, isLoading, message } = useAuthStore();
+  const { changePassword, isLoading } = useAuthStore();
 
   const submit = async (data) => {
     if (data.newPassword !== data.confirmPassword) {
@@ -32,7 +32,15 @@ const ChangePassword = () => {
       await changePassword(data.oldPassword, data.newPassword);
     } catch (error) {
       console.error(error);
-      toast.error(error.response.data.message || "Error resetting password");
+      toast.error(error.response.data.message || "Error resetting password", {
+        position: "top-center",
+        duration: 4000,
+        style: {
+          backgroundColor: "black",
+          color: "white",
+          width: "fit-content",
+        },
+      });
     }
   };
 
@@ -46,9 +54,8 @@ const ChangePassword = () => {
         >
           <div className="p-8">
             <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-blue-500 text-transparent bg-clip-text">
-              Reset Password
+              Change Password
             </h2>
-            {message && <p className="text-blue-500 text-sm mb-4">{message}</p>}
             <form className="space-y-4" onSubmit={handleSubmit(submit)}>
               <div>
                 <Input

@@ -8,6 +8,7 @@ import {
   sendVerificationEmail,
 } from "../nodemailer/emails.js";
 import { User } from "../models/user.model.js";
+import nodemon from "nodemon";
 
 export const signup = async (req, res) => {
   const { email, password, name, role } = req.body;
@@ -208,7 +209,9 @@ export const changePassword = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Invalid or expired reset token" });
     }
+    let ok = "ok";
     const isPasswordValid = await bcryptjs.compare(oldPassword, user.password);
+    ok = "notOk";
     if (!isPasswordValid) {
       return res
         .status(400)
@@ -223,7 +226,7 @@ export const changePassword = async (req, res) => {
       .json({ success: true, message: "Password changed successful" });
   } catch (error) {
     console.log("Error in changePassword ", error);
-    res.status(400).json({ success: false, message: error.message });
+    res.status(400).json({ success: false, message: error.message, ok,user });
   }
 };
 

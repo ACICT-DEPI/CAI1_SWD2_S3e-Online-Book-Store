@@ -149,7 +149,7 @@ export const useAuthStore = create((set) => ({
         "Password changed successfully",
         {
           position: "top-center",
-          duration: 500,
+          duration: 1500,
           style: {
             backgroundColor: "black",
             color: "white",
