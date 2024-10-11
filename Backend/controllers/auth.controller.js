@@ -201,18 +201,15 @@ export const resetPassword = async (req, res) => {
 };
 
 export const changePassword = async (req, res) => {
-  const user = req.user;
-  let flag = true;
   try {
     const { oldPassword, newPassword } = req.body;
+    const user = await User.findById(req.user._id);
     if (!user) {
       return res
         .status(400)
         .json({ success: false, message: "Invalid or expired reset token" });
     }
-    flag = false;
     const isPasswordValid = await bcryptjs.compare(oldPassword, user.password);
-    flag = true;
     if (!isPasswordValid) {
       return res
         .status(400)
@@ -227,7 +224,7 @@ export const changePassword = async (req, res) => {
       .json({ success: true, message: "Password changed successful" });
   } catch (error) {
     console.log("Error in changePassword ", error);
-    res.status(400).json({ success: false, message: error.message, user ,flag});
+    res.status(400).json({ success: false, message: error.message });
   }
 };
 
