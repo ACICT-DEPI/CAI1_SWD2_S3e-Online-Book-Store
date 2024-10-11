@@ -3,7 +3,7 @@ import cloudinary from "../utils/cloudinary.js";
 
 export const getAllBooks = async (req, res) => {
   try {
-    // const books = await Book.find({});
+    const books = await Book.find({});
     res.status(200).json({ books: ["book1", "book1", "book1"] });
   } catch (error) {
     console.log("Error in getAllBooks controller", error.message);
