@@ -2,7 +2,7 @@ import { CiLogout } from "react-icons/ci";
 import { FaUserEdit } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 
-import { FaUser } from "react-icons/fa";
+// import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import Button from "./ui/Button";
@@ -10,21 +10,20 @@ import Button from "./ui/Button";
 const Sidebar = () => {
   const { user, logout } = useAuthStore();
   const sections = [
+    // {
+    //   Text: "Edit Profile",
+    //   Icon: <FaUser size={20} />,
+    //   link: "/edit-profile",
+    // },
     {
-      Text: "Edit Profile",
-      Icon: <FaUser size={20} />,
-      link: "/edit-profile",
+      Text: "Change Password",
+      Icon: <FaUserEdit size={20} />,
+      link: "/change-Password",
     },
     {
       Text: "Orders",
       Icon: <IoCart size={20} />,
       link: "/orders",
-    },
-
-    {
-      Text: "Change Password",
-      Icon: <FaUserEdit size={20} />,
-      link: "/change-Password",
     },
   ];
 
