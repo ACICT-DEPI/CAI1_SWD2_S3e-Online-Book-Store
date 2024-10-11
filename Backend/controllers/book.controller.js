@@ -1,10 +1,10 @@
-import Book from "../models/book.model.js";
+// import Book from "../models/book.model.js";
 import cloudinary from "../utils/cloudinary.js";
 
 export const getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find({});
-    res.status(200).json({ books });
+    // const books = await Book.find({});
+    res.status(200).json({ books: ["book1", "book1", "book1"] });
   } catch (error) {
     console.log("Error in getAllBooks controller", error.message);
     res.status(500).json({ message: "Server error", error: error.message });
