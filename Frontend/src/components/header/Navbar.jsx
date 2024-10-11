@@ -95,7 +95,7 @@ const Navbar = ({ toggle, setToggle }) => {
                 to={"/wish-list"}
                 className="text-gray-600 hover:text-red-600 px-3 py-1 rounded-md font-medium transition duration-300 ease-in-out flex items-center"
               >
-                <FaRegHeart size={25}/>
+                <FaRegHeart size={25} />
               </NavLink>
               <UserMenu />
             </>
@@ -165,6 +165,15 @@ const Navbar = ({ toggle, setToggle }) => {
             >
               Reviews
             </NavLink>
+            {isAuthor && (
+              <NavLink
+                className="text-gray-600 hover:bg-blue-500 hover:text-white px-3 py-1 rounded-md font-medium transition duration-300 ease-in-out flex items-center"
+                to="dashboard"
+              >
+                <LuLock className="inline-block mr-1" size={18} />
+                <span className="hidden sm:inline">Dashboard</span>
+              </NavLink>
+            )}
             <NavLink
               to="/cart"
               onClick={() => setToggle(false)}
