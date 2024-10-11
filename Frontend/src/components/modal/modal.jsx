@@ -1,4 +1,3 @@
-import "./Modal.css";
 import Rating from "../../components/book-slider/Rating";
 import { Link, useNavigate } from "react-router-dom";
 import { BsXCircleFill, BsCartPlus } from "react-icons/bs";
