@@ -29,6 +29,7 @@ import OrderPage from "../pages/OrderPage";
 import EditProfile from "../pages/EditProfile";
 import WishListPage from "../pages/WishListPage";
 import OrdersPage from "../pages/OrdersPage";
+import ChangePassword from "../pages/ChangePassword";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -169,6 +170,14 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute>
               <OrdersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/change-password"
+          element={
+            <ProtectedRoute>
+              <ChangePassword />
             </ProtectedRoute>
           }
         />

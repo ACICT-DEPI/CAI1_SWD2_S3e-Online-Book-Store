@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-			role,
+      role,
       verificationToken,
       verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
     });
@@ -67,12 +67,10 @@ export const verifyEmail = async (req, res) => {
     });
 
     if (!user) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Invalid or expired verification code",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired verification code",
+      });
     }
 
     user.isVerified = true;
@@ -157,12 +155,10 @@ export const forgotPassword = async (req, res) => {
       `${process.env.CLIENT_URL}/reset-password/${resetToken}`
     );
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Password reset link sent to your email",
-      });
+    res.status(200).json({
+      success: true,
+      message: "Password reset link sent to your email",
+    });
   } catch (error) {
     console.log("Error in forgotPassword ", error);
     res.status(400).json({ success: false, message: error.message });
@@ -199,6 +195,34 @@ export const resetPassword = async (req, res) => {
       .json({ success: true, message: "Password reset successful" });
   } catch (error) {
     console.log("Error in resetPassword ", error);
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    const user = req.user;
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid or expired reset token" });
+    }
+    const isPasswordValid = await bcryptjs.compare(oldPassword, user.password);
+    if (!isPasswordValid) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Password is incorrect" });
+    }
+    const hashedPassword = await bcryptjs.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+    await sendResetSuccessEmail(user.email);
+    res
+      .status(200)
+      .json({ success: true, message: "Password changed successful" });
+  } catch (error) {
+    console.log("Error in changePassword ", error);
     res.status(400).json({ success: false, message: error.message });
   }
 };

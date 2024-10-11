@@ -24,7 +24,7 @@ const Sidebar = () => {
     {
       Text: "Change Password",
       Icon: <FaUserEdit size={20} />,
-      link: "/admin/changePassword",
+      link: "/change-Password",
     },
   ];
 

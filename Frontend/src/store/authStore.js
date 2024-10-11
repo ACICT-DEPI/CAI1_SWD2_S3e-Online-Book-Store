@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "./../config/axios";
+import toast from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -89,18 +90,6 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  // checkAuth: async (user, err) => {
-  //   if (!user) {
-  //     set({ error: err, isCheckingAuth: false, isAuthenticated: false });
-  //   } else {
-  //     set({
-  //       user: user,
-  //       isAuthenticated: true,
-  //       isCheckingAuth: false,
-  //     });
-  //   }
-  // },
-
   checkAuth: async () => {
     set({ isCheckingAuth: true, error: null });
     try {
@@ -143,6 +132,35 @@ export const useAuthStore = create((set) => ({
       set({
         isLoading: false,
         error: error.response.data.message || "Error resetting password",
+      });
+      throw error;
+    }
+  },
+
+  changePassword: async (oldPassword, newPassword) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await axios.post(`/auth/change-password`, {
+        oldPassword,
+        newPassword,
+      });
+      set({ message: response.data.message, isLoading: false });
+      toast.success(
+        "Password reset successfully, redirecting to login page...",
+        {
+          position: "top-center",
+          duration: 500,
+          style: {
+            backgroundColor: "black",
+            color: "white",
+            width: "fit-content",
+          },
+        }
+      );
+    } catch (error) {
+      set({
+        isLoading: false,
+        error: error.response.data.message || "Error changing password",
       });
       throw error;
     }

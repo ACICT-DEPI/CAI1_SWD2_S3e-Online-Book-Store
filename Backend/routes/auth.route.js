@@ -6,6 +6,7 @@ import {
   verifyEmail,
   forgotPassword,
   resetPassword,
+  changePassword,
   checkAuth,
 } from "../controllers/auth.controller.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
@@ -22,5 +23,6 @@ router.post("/verify-email", verifyEmail);
 router.post("/forgot-password", forgotPassword);
 
 router.post("/reset-password/:token", resetPassword);
+router.post("/change-password",protectRoute, changePassword);
 
 export default router;
