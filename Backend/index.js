@@ -32,8 +32,8 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
   app.get("/", (req, res) => {
-    const books = await Book.find({});
-    res.status(200).json({ books });
+    // const books = await Book.find({});
+    res.status(200).json({port:process.env.PORT});
   });
 
 app.listen(PORT, () => {
