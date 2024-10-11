@@ -33,7 +33,7 @@ app.use("/api/analytics", analyticsRoutes);
   app.get("/", (req, res) => {
     res
       .status(200)
-      .json({ message: `Server is running on ${process.env.PORT}` });
+      .json({ message: `Server is running on ${process.env.MONGO_URI}` });
   });
 
 app.listen(PORT, () => {
