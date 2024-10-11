@@ -40,7 +40,12 @@ app.use("/api/analytics", analyticsRoutes);
 await connectDB();
 
 app.get("/", async (req, res) => {
-  res.status(200).json({ message: `Server is running on port: ${PORT}` });
+  res
+    .status(200)
+    .json({
+      message: `Server is running on port: ${PORT}`,
+      cookie: req.cookies,
+    });
 });
 
 app.listen(PORT, () => {
