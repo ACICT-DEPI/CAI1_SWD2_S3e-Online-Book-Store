@@ -33,7 +33,7 @@ app.use("/api/analytics", analyticsRoutes);
 
   app.get("/", (req, res) => {
     // const books = await Book.find({});
-    res.status(200).json({port:process.env.PORT});
+    res.status(200).json({port:PORT});
   });
 
 app.listen(PORT, () => {
