@@ -171,7 +171,7 @@ const Navbar = ({ toggle, setToggle }) => {
                 to="dashboard"
               >
                 <LuLock className="inline-block mr-1" size={18} />
-                <span className="hidden sm:inline">Dashboard</span>
+                <span className="sm:inline">Dashboard</span>
               </NavLink>
             )}
             <NavLink
