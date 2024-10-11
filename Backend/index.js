@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
+import Book from "../models/book.model.js";
 
 import { connectDB } from "./db/connectDB.js";
 
