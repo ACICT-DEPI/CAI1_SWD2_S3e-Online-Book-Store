@@ -11,7 +11,6 @@ import bookRoutes from "./routes/book.router.js";
 import cartRoutes from "./routes/cart.route.js";
 import paymentRoutes from "./routes/payment.route.js";
 import analyticsRoutes from "./routes/analytics.route.js";
-import Book from "./models/book.model.js";
 
 dotenv.config();
 
@@ -32,8 +31,8 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
 app.get("/", async (req, res) => {
-  const books = await connectDB();
-  res.status(200).json({ books });
+  await connectDB();
+  res.status(200).json({ message: `Server is running on port: ${PORT}` });
 });
 
 app.listen(PORT, () => {
