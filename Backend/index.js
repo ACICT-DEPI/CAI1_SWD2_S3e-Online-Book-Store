@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
-import Book from "../models/book.model.js";
 
 import { connectDB } from "./db/connectDB.js";
 
@@ -19,7 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use("uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(express.json());
@@ -32,7 +31,7 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
   app.get("/", (req, res) => {
-    res.status(200).json({ message: "Server is running" });
+    res.status(200).json({ message: "Server is running on", PORT });
   });
 
 app.listen(PORT, () => {
