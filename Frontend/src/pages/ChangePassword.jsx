@@ -10,6 +10,7 @@ const ChangePassword = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -30,17 +31,13 @@ const ChangePassword = () => {
     }
     try {
       await changePassword(data.oldPassword, data.newPassword);
-    } catch (error) {
-      console.error(error);
-      // toast.error(error.response.data.message || "Error resetting password", {
-      //   position: "top-center",
-      //   duration: 4000,
-      //   style: {
-      //     backgroundColor: "black",
-      //     color: "white",
-      //     width: "fit-content",
-      //   },
-      // });
+      reset({
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      })
+    } catch (e) {
+      console.error(e);
     }
   };
 

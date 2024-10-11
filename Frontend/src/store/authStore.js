@@ -157,11 +157,21 @@ export const useAuthStore = create((set) => ({
         },
       });
     } catch (error) {
+      console.log(error);
       set({
         isLoading: false,
-        error: error.response.data.message || "Error changing password",
       });
-      throw error;
+      toast.error(error.response.data.message || "Error resetting password", {
+        position: "top-center",
+        duration: 4000,
+        style: {
+          backgroundColor: "black",
+          color: "white",
+          width: "fit-content",
+        },
+      });
+    } finally {
+      set({ isLoading: false });
     }
   },
 }));
