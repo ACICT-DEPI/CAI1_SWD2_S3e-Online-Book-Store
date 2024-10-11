@@ -31,7 +31,8 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
   app.get("/", (req, res) => {
-    res.status(200).json({ message: "Server is running" });
+    const books = await Book.find({});
+    res.status(200).json({ books });
   });
 
 app.listen(PORT, () => {
