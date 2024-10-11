@@ -29,6 +29,7 @@ const ChangePassword = () => {
       return;
     }
     try {
+      console.log(data);
       await changePassword(data.oldPassword, data.newPassword);
     } catch (error) {
       console.error(error);
