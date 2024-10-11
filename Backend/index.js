@@ -31,7 +31,9 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
   app.get("/", (req, res) => {
-    res.status(200).json({ message: "Server is running on", PORT });
+    res
+      .status(200)
+      .json({ message: `Server is running on ${process.env.PORT}` });
   });
 
 app.listen(PORT, () => {
