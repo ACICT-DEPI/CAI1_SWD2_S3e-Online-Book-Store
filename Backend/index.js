@@ -32,7 +32,7 @@ app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
 app.get("/", async (req, res) => {
-  const books = connectDB();
+  const books = await connectDB();
   res.status(200).json({ books });
 });
 
