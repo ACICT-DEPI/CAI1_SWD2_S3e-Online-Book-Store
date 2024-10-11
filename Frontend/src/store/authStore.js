@@ -146,7 +146,7 @@ export const useAuthStore = create((set) => ({
       });
       set({ message: response.data.message, isLoading: false });
       toast.success(
-        "Password reset successfully, redirecting to login page...",
+        "Password changed successfully",
         {
           position: "top-center",
           duration: 500,

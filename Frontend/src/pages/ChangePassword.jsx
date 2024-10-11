@@ -4,7 +4,7 @@ import { LuLock } from "react-icons/lu";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import InputErrorMessage from "../components/ui/InputErrorMessage";
-import { Button } from "@headlessui/react";
+import Button from "./../components/ui/Button";
 
 const ChangePassword = () => {
   const {
@@ -32,7 +32,7 @@ const ChangePassword = () => {
       await changePassword(data.oldPassword, data.newPassword);
     } catch (error) {
       console.error(error);
-      toast.error(error.message || "Error resetting password");
+      toast.error(error.response.data.message || "Error resetting password");
     }
   };
 
