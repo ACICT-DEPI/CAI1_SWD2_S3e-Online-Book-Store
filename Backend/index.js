@@ -37,8 +37,9 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
+await connectDB();
+
 app.get("/", async (req, res) => {
-  await connectDB();
   res.status(200).json({ message: `Server is running on port: ${PORT}` });
 });
 
