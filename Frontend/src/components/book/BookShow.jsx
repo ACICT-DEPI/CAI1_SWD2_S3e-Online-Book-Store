@@ -1,16 +1,16 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
-import { useBookStore } from "./../../store/bookStore";
-import { useCartStore } from "./../../store/cartStore";
+import { useBookStore } from "../../store/bookStore";
+import { useCartStore } from "../../store/cartStore";
 import { useNavigate } from "react-router-dom";
+import { LuBookKey } from "react-icons/lu";
 
 import Modal from "../modal/modal";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import toast from "react-hot-toast";
 
-export default function BookShow() {
-  const { books } = useBookStore();
+export default function BookShow({ books }) {
   const { addToCart } = useCartStore();
   const { updateReviews, wishList } = useBookStore();
   const [openModal, setOpenModal] = useState(false);
@@ -40,7 +40,7 @@ export default function BookShow() {
               <img
                 src={book.image}
                 alt={book.title}
-                className="w-full h-[300px] object-contain"
+                className="h-full rounded-xl"
               />
 
               <div className="absolute top-3 right-3 bg-white flex flex-col space-y-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
@@ -48,7 +48,9 @@ export default function BookShow() {
                   onClick={() => handleClic(book._id)}
                   className="bg-white px-4 pt-3 rounded-full"
                 >
-                  <i className="fa fa-search"></i>
+                  <i className="">
+                    <LuBookKey />
+                  </i>
                 </button>
                 <button
                   className={`bg-white px-4 pb-3 rounded-full ${
@@ -75,8 +77,12 @@ export default function BookShow() {
             </div>
 
             <div className="py-4 px-2">
-              <p className="text-center">{book.title}</p>
-              <h3 className="text-center">Price: ${book.price}</h3>
+              <p className="text-center font-bold hover:text-blue-500">
+                {book.title}
+              </p>
+              <h3 className="text-center text-blue-700">
+                Price: ${book.price}
+              </h3>
             </div>
 
             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out pb-2 px-2">
@@ -99,7 +105,7 @@ export default function BookShow() {
           </div>
         );
       })}
-      {/* هنا يتم عرض المودال لو الـ openModal بـ true */}
+
       {openModal && <Modal bookData={bookData} setOpenModal={setOpenModal} />}
     </div>
   );

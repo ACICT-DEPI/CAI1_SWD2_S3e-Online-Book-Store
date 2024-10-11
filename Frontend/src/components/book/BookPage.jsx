@@ -10,7 +10,7 @@ import {
 import { useCartStore } from "../../store/cartStore";
 import { useReviewStore } from "../../store/reviewStore";
 import toast from "react-hot-toast";
-import { parseingDate } from './../../utils/index';
+import { parseingDate } from "./../../utils/index";
 
 const BookPage = () => {
   const { books } = useBookStore();
@@ -24,11 +24,10 @@ const BookPage = () => {
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
-    addReview(book._id, reviewText); 
+    addReview(book._id, reviewText);
     setReviewText("");
     setShowModal(false);
-};
-
+  };
 
   return (
     <div className="min-h-[705px] container mx-auto px-4 py-12 flex items-center justify-center">
@@ -152,4 +151,4 @@ const BookPage = () => {
   );
 };
 
-export default BookPage; 
+export default BookPage;
