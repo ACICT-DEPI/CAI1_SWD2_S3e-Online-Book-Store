@@ -30,11 +30,9 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.get("*", (req, res) => {
+  app.get("/", (req, res) => {
     res.status(200).json({ message: "Server is running" });
   });
-}
 
 app.listen(PORT, () => {
   connectDB();
