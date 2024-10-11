@@ -29,19 +29,18 @@ const ChangePassword = () => {
       return;
     }
     try {
-      console.log(data);
       await changePassword(data.oldPassword, data.newPassword);
     } catch (error) {
       console.error(error);
-      toast.error(error.response.data.message || "Error resetting password", {
-        position: "top-center",
-        duration: 4000,
-        style: {
-          backgroundColor: "black",
-          color: "white",
-          width: "fit-content",
-        },
-      });
+      // toast.error(error.response.data.message || "Error resetting password", {
+      //   position: "top-center",
+      //   duration: 4000,
+      //   style: {
+      //     backgroundColor: "black",
+      //     color: "white",
+      //     width: "fit-content",
+      //   },
+      // });
     }
   };
 

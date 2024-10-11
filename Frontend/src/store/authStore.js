@@ -134,6 +134,8 @@ export const useAuthStore = create((set) => ({
         error: error.response.data.message || "Error resetting password",
       });
       throw error;
+    } finally {
+      set({ isLoading: false });
     }
   },
 
@@ -145,18 +147,15 @@ export const useAuthStore = create((set) => ({
         newPassword,
       });
       set({ message: response.data.message, isLoading: false });
-      toast.success(
-        "Password changed successfully",
-        {
-          position: "top-center",
-          duration: 1500,
-          style: {
-            backgroundColor: "black",
-            color: "white",
-            width: "fit-content",
-          },
-        }
-      );
+      toast.success("Password changed successfully", {
+        position: "top-center",
+        duration: 1500,
+        style: {
+          backgroundColor: "black",
+          color: "white",
+          width: "fit-content",
+        },
+      });
     } catch (error) {
       set({
         isLoading: false,
